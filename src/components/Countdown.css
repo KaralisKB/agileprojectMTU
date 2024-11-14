@@ -1,0 +1,22 @@
+.countdown {
+    text-align: center;
+    margin: 4rem 0;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .timer {
+    font-size: 2rem;
+    color: #3e5c76;
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .timer span {
+    background: #f9f9f9;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

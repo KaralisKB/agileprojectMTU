@@ -1,0 +1,62 @@
+.header {
+    background-color: #334e68;
+    padding: 1.5rem 3rem;  /* Increased padding for a more prominent header */
+    color: white;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-title {
+    font-size: 2.4rem;  /* Increased font size for a more prominent look */
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    color: #f0f4f8;
+  }
+  
+  .header-nav {
+    display: flex;
+    gap: 2rem;  /* Increased gap for better separation between nav items */
+  }
+  
+  .nav-link {
+    color: #f0f4f8;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;  /* Increased font weight for a more defined link */
+    font-size: 1.2rem;  /* Increased font size for better readability */
+    transition: color 0.3s, background-color 0.3s, transform 0.2s;
+    padding: 0.7rem 1.2rem;  /* Increased padding for a larger clickable area */
+    border-radius: 6px;
+  }
+  
+  .nav-link:hover {
+    color: #ffffff;
+    background-color: #3e5c76;
+    transform: translateY(-2px);
+  }
+  
+
+  .auth-links {
+    margin-left: auto;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .auth-link {
+    padding: 0.5rem 1rem;
+    border: 2px solid #f0f4f8;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #f0f4f8;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.auth-link:hover {
+    background-color: #f0f4f8; 
+    color: #334e68; 
+}

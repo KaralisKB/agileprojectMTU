@@ -1,0 +1,149 @@
+/* General Reset and Background Consistency */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent any overflow issues */
+    background-color: #f0f4f8; /* Set a consistent background color for the entire page */
+    scroll-behavior: smooth;
+  }
+  
+  /* Container for the Entire Page */
+  .home-container {
+    padding: 8rem 3rem; /* Keep generous padding for a welcoming feel */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: transparent; /* Ensure no background color override */
+  }
+  
+  .home-title {
+    font-family: 'Merriweather', serif;
+    font-size: 4.5rem; /* Increased the title size for better prominence */
+    color: #334e68;
+    margin-bottom: 2rem; /* Added margin to separate title and description */
+  }
+  
+  .home-description {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2rem; /* Increased font size for readability */
+    color: #627d98;
+    max-width: 800px;
+    line-height: 1.8;
+    margin-bottom: 3rem; /* Spaced to align with button positioning */
+  }
+  
+  /* Call to Action Section */
+  .cta-section {
+    display: flex;
+    gap: 2rem; /* Spacing between buttons */
+    justify-content: center;
+    margin-bottom: 4rem; /* Added space between CTA and the next section */
+    background-color: transparent; /* Ensure no different background color */
+  }
+  
+  .cta-button {
+    padding: 1.2rem 2.5rem; /* Increased padding for a larger button area */
+    border-radius: 8px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none; /* Make sure no border is added */
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    outline: none; /* Remove outline */
+  }
+  
+
+  .primary-button {
+    background-color: #3e5c76;
+    color: white;
+  }
+  
+  .primary-button:hover {
+    background-color: #2f4858;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .secondary-button {
+    background-color: transparent;
+    color: #334e68;
+    border: 2px solid #334e68;
+  }
+  
+  .secondary-button:hover {
+    background-color: #334e68;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Featured Books Section */
+  .featured-section {
+    margin-top: 5rem; /* Increased space between CTA buttons and featured books */
+    text-align: center;
+    background-color: transparent; /* Ensure consistency in background */
+  }
+  
+  .featured-title {
+    font-family: 'Merriweather', serif;
+    font-size: 3.5rem; /* Larger size to distinguish section titles */
+    color: #334e68;
+    margin-bottom: 2.5rem; /* Space between title and books */
+  }
+  
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Balanced size for cards */
+    gap: 2.5rem; /* Increased gap for more space between cards */
+    max-width: 1200px; /* Limit width for better containment */
+    margin: 0 auto;
+  }
+  
+  .book-card {
+    background-color: #f0f4f8; /* Keep card background white for readability */
+    padding: 2.5rem; /* More padding for larger cards */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .book-title {
+    font-size: 2rem;
+    color: #3e5c76;
+    margin-bottom: 0.5rem;
+  }
+  
+  .book-author {
+    font-size: 1.4rem;
+    color: #627d98;
+  }
+  
+  /* Footer Styles */
+  .footer {
+    padding-top: 4rem; /* Added more padding to separate it from other sections */
+    background-color: #334e68; /* Footer background consistent with the header */
+    color: #f0f4f8;
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: center;
+  }
+  
+  .footer-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2rem;
+  }
+  

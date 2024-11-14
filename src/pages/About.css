@@ -1,0 +1,56 @@
+/* Container for the Entire About Page */
+.about-container {
+    padding: 6rem 3rem;
+    background-color: #e9eff4; /* Ensure consistent background color */
+  }
+  
+  /* About Book Fair Section */
+  .about-section {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .about-title {
+    font-family: 'Merriweather', serif;
+    font-size: 3.5rem;
+    color: #334e68;
+    margin-bottom: 2rem;
+  }
+  
+  .about-description {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+    color: #627d98;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  
+  /* Art Gallery Section */
+  .art-gallery-section {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .section-title {
+    font-family: 'Merriweather', serif;
+    font-size: 2.8rem;
+    color: #334e68;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-description {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.4rem;
+    color: #627d98;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  
+  /* Renowned Writers Section */
+  .renowned-writers-section {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
