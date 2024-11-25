@@ -24,33 +24,36 @@ const Login = () => {
 
 
     const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await api.post('/login', { email, password});
-            if (response.status === 200) {
-                setMessage('Login was succesful');
-                const userInfo = await api.get('/me');
-                const { type_user_id } = userInfo.data;
-
-                const role = selectUserRole(type_user_id);
-
-                localStorage.setItem('userRole', role);
-                localStorage.setItem('isLoggedIn', true);
-
-
-                if (role === 'admin'){
-                    navigate('/admin-dashboard');
-                } else if (role === 'visitor') {
-                    navigate('/visitor-dashboard');
-                } else if( role === 'exhibitor') {
-                    navigate('/exhibitor-dashboard');
-                }
-
-            }
-        } catch (error) {
-            setMessage('Login failed: ' + (error.response?.data || 'Unknown error'));
-        }
-    };
+      e.preventDefault();
+      try {
+          const response = await api.post('/login', { email, password });
+          if (response.status === 200) {
+              setMessage('Login was successful');
+              const token = response.data.token; // or however the token is returned
+              
+              // Set the token in the headers
+              api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  
+              const userInfo = await api.get('/me'); // Now with the token attached
+              const { type_user_id } = userInfo.data;
+  
+              const role = selectUserRole(type_user_id);
+  
+              localStorage.setItem('userRole', role);
+              localStorage.setItem('isLoggedIn', true);
+  
+              if (role === 'admin') {
+                  navigate('/admin-dashboard');
+              } else if (role === 'visitor') {
+                  navigate('/visitor-dashboard');
+              } else if (role === 'exhibitor') {
+                  navigate('/exhibitor-dashboard');
+              }
+          }
+      } catch (error) {
+          setMessage('Login failed: ' + (error.response?.data || 'Unknown error'));
+      }
+  };
 
     return (
         <div className="login-container">
