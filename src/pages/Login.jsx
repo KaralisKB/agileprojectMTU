@@ -32,7 +32,7 @@ const Login = () => {
               const token = response.data.token; // or however the token is returned
               
               // Set the token in the headers
-              api.defaults.headers.common['myAuthCookie'] = token;
+              api.defaults.headers.common['cookie'] = `myAuthCookie=${token}`
   
               const userInfo = await api.get('/me'); // Now with the token attached
               const { type_user_id } = userInfo.data;
