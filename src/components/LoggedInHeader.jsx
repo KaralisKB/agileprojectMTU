@@ -1,39 +1,40 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import './LoggedInHeader.css';
 
-const LoggedInHeader = ({ role, onLogout }) => {
+const LoggedInHeader = () => {
   const navigate = useNavigate();
+  const role = localStorage.getItem('userRole'); // Get the user role from local storage
 
   const handleLogout = () => {
-    // Clear localStorage or cookies and trigger logout logic
+    // Clear authentication data
+    localStorage.removeItem('authToken');
     localStorage.removeItem('userRole');
     localStorage.removeItem('isLoggedIn');
-    onLogout();
-    navigate('/'); // Navigate to home page
+
+    // Navigate to the home page after logout
+    navigate('/');
   };
 
-  const getDashboardLink = () => {
-    switch (role) {
-      case 'admin':
-        return '/admin-dashboard';
-      case 'exhibitor':
-        return '/exhibitor-dashboard';
-      case 'visitor':
-        return '/visitor-dashboard';
-      default:
-        return '/';
-    }
+  const getDashboardPath = () => {
+    // Determine the dashboard path based on user role
+    if (role === 'admin') return '/admin-dashboard';
+    if (role === 'exhibitor') return '/exhibitor-dashboard';
+    if (role === 'visitor') return '/visitor-dashboard';
+    return '/';
   };
 
   return (
-    <nav className="header">
-      <Link to={getDashboardLink()} className="header-link">
-        Home Dashboard
-      </Link>
-      <button className="header-link" onClick={handleLogout}>
-        Logout
-      </button>
-    </nav>
+    <header className="header">
+      <div className="header-container">
+        <h1 className="header-title">International Book Fair</h1>
+        <nav className="header-nav">
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to={getDashboardPath()} className="nav-link">Dashboard</Link>
+          <button onClick={handleLogout} className="nav-link logout-button">Logout</button>
+        </nav>
+      </div>
+    </header>
   );
 };
 
