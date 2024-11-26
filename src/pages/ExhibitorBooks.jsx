@@ -11,10 +11,10 @@ const ExhibitorBooks = () => {
     description: "",
     exhibitor_name: "",
   });
-  const [editingBook, setEditingBook] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Fetch all books
   const fetchAllBooks = async () => {
     try {
       setLoading(true);
@@ -22,7 +22,7 @@ const ExhibitorBooks = () => {
 
       const response = await fetch(`${BASE_URL}/list-books`, {
         method: "GET",
-        credentials: "include", // Include cookies
+        credentials: "include", // Include cookies for authentication
       });
 
       if (!response.ok) {
@@ -42,6 +42,7 @@ const ExhibitorBooks = () => {
     }
   };
 
+  // Add a new book
   const addBook = async () => {
     try {
       if (
@@ -57,7 +58,7 @@ const ExhibitorBooks = () => {
       const response = await fetch(`${BASE_URL}/create-book`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // Include cookies
+        credentials: "include", // Include cookies for authentication
         body: JSON.stringify(newBook),
       });
 
@@ -68,63 +69,17 @@ const ExhibitorBooks = () => {
         throw new Error("Failed to add book.");
       }
 
-      await fetchAllBooks();
+      await fetchAllBooks(); // Refresh the book list after adding a new book
       setNewBook({ title: "", author: "", description: "", exhibitor_name: "" });
     } catch (error) {
       setError(error.message || "Failed to add book. Please try again.");
     }
   };
 
-  const updateBook = async (bookId) => {
-    try {
-      const response = await fetch(`${BASE_URL}/update-book/${bookId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include", // Include cookies
-        body: JSON.stringify(editingBook),
-      });
-
-      if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error("Unauthorized access. Please log in.");
-        }
-        throw new Error("Failed to update book.");
-      }
-
-      await fetchAllBooks();
-      setEditingBook(null);
-    } catch (error) {
-      setError(error.message || "Failed to update book. Please try again.");
-    }
-  };
-
-  const deleteBook = async (bookId) => {
-    try {
-      const response = await fetch(`${BASE_URL}/delete-book/${bookId}`, {
-        method: "DELETE",
-        credentials: "include", // Include cookies
-      });
-
-      if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error("Unauthorized access. Please log in.");
-        }
-        throw new Error("Failed to delete book.");
-      }
-
-      await fetchAllBooks();
-    } catch (error) {
-      setError(error.message || "Failed to delete book. Please try again.");
-    }
-  };
-
-  const handleInputChange = (e, isEditing = false) => {
+  // Handle input changes for the new book form
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (isEditing) {
-      setEditingBook((prev) => ({ ...prev, [name]: value }));
-    } else {
-      setNewBook((prev) => ({ ...prev, [name]: value }));
-    }
+    setNewBook((prev) => ({ ...prev, [name]: value }));
   };
 
   useEffect(() => {
@@ -144,27 +99,27 @@ const ExhibitorBooks = () => {
           placeholder="Title"
           name="title"
           value={newBook.title}
-          onChange={(e) => handleInputChange(e)}
+          onChange={handleInputChange}
         />
         <input
           type="text"
           placeholder="Author"
           name="author"
           value={newBook.author}
-          onChange={(e) => handleInputChange(e)}
+          onChange={handleInputChange}
         />
         <textarea
           placeholder="Description"
           name="description"
           value={newBook.description}
-          onChange={(e) => handleInputChange(e)}
+          onChange={handleInputChange}
         ></textarea>
         <input
           type="text"
           placeholder="Exhibitor Name"
           name="exhibitor_name"
           value={newBook.exhibitor_name}
-          onChange={(e) => handleInputChange(e)}
+          onChange={handleInputChange}
         />
         <button onClick={addBook}>Add Book</button>
       </div>
@@ -176,42 +131,16 @@ const ExhibitorBooks = () => {
             <li key={book.id} className="book-item">
               <strong>{book.title}</strong> by {book.author}
               <p>{book.description}</p>
-              <p><em>{book.exhibitor_name}</em></p>
-              <button className="edit" onClick={() => setEditingBook(book)}>Edit</button>
-              <button className="delete" onClick={() => deleteBook(book.id)}>Delete</button>
+              <p>
+                <em>{book.exhibitor_name}</em>
+              </p>
             </li>
           ))}
         </ul>
       </div>
 
-      {editingBook && (
-        <div className="edit-book-form">
-          <h2>Edit Book</h2>
-          <input
-            type="text"
-            placeholder="Title"
-            name="title"
-            value={editingBook.title}
-            onChange={(e) => handleInputChange(e, true)}
-          />
-          <input
-            type="text"
-            placeholder="Author"
-            name="author"
-            value={editingBook.author}
-            onChange={(e) => handleInputChange(e, true)}
-          />
-          <textarea
-            placeholder="Description"
-            name="description"
-            value={editingBook.description}
-            onChange={(e) => handleInputChange(e, true)}
-          ></textarea>
-          <button onClick={() => updateBook(editingBook.id)}>Update Book</button>
-          <button className="cancel-button" onClick={() => setEditingBook(null)}>
-            Cancel
-          </button>
-        </div>
+      {!loading && !error && books.length === 0 && (
+        <p className="no-books-message">No books available.</p>
       )}
     </div>
   );

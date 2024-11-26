@@ -9,6 +9,7 @@ const ManageBooks = () => {
     title: "",
     author: "",
     description: "",
+    exhibitor_name: "", // Added exhibitor_name
   });
   const [editingBook, setEditingBook] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -45,8 +46,8 @@ const ManageBooks = () => {
   // Add a new book
   const addBook = async () => {
     try {
-      if (!newBook.title || !newBook.author || !newBook.description) {
-        alert("Please fill out all fields.");
+      if (!newBook.title || !newBook.author || !newBook.description || !newBook.exhibitor_name) {
+        alert("Please fill out all fields, including Exhibitor Name.");
         return;
       }
 
@@ -67,7 +68,7 @@ const ManageBooks = () => {
       }
 
       await fetchAllBooks();
-      setNewBook({ title: "", author: "", description: "" });
+      setNewBook({ title: "", author: "", description: "", exhibitor_name: "" });
     } catch (error) {
       setError(error.message || "Failed to add book. Please try again.");
     }
@@ -162,6 +163,13 @@ const ManageBooks = () => {
           value={newBook.description}
           onChange={(e) => handleInputChange(e)}
         ></textarea>
+        <input
+          type="text"
+          placeholder="Exhibitor Name"
+          name="exhibitor_name"
+          value={newBook.exhibitor_name}
+          onChange={(e) => handleInputChange(e)}
+        />
         <button onClick={addBook}>Add Book</button>
       </div>
 
@@ -172,6 +180,7 @@ const ManageBooks = () => {
             <li key={book.id} className="book-item">
               <strong>{book.title}</strong> by {book.author}
               <p>{book.description}</p>
+              <p><em>Exhibitor: {book.exhibitor_name}</em></p>
               <button className="edit" onClick={() => setEditingBook(book)}>Edit</button>
               <button className="delete" onClick={() => deleteBook(book.id)}>Delete</button>
             </li>
@@ -202,6 +211,13 @@ const ManageBooks = () => {
             value={editingBook.description}
             onChange={(e) => handleInputChange(e, true)}
           ></textarea>
+          <input
+            type="text"
+            placeholder="Exhibitor Name"
+            name="exhibitor_name"
+            value={editingBook.exhibitor_name}
+            onChange={(e) => handleInputChange(e, true)}
+          />
           <button onClick={() => updateBook(editingBook.id)}>Update Book</button>
           <button className="cancel-button" onClick={() => setEditingBook(null)}>
             Cancel
