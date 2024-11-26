@@ -15,12 +15,23 @@ const ExhibitorBooks = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(`${BASE_URL}/list-books`);
+
+      const token = localStorage.getItem("authToken"); // Retrieve token from local storage
+      if (!token) throw new Error("Authentication required");
+
+      const response = await fetch(`${BASE_URL}/list-books`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include token in Authorization header
+        },
+      });
+
+      if (!response.ok) throw new Error(`Failed to fetch books: ${response.status}`);
       const data = await response.json();
-      setBooks(data);
+
+      setBooks(data || []); // Ensure books is always an array
     } catch (error) {
-      setError("Failed to fetch books. Please try again.");
-      console.error("Error fetching books:", error);
+      setError(error.message || "Failed to fetch books. Please try again.");
+      setBooks([]); // Reset books to an empty array in case of failure
     } finally {
       setLoading(false);
     }
@@ -34,48 +45,66 @@ const ExhibitorBooks = () => {
         return;
       }
 
+      const token = localStorage.getItem("authToken");
+      if (!token) throw new Error("Authentication required");
+
       const response = await fetch(`${BASE_URL}/create-book`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(newBook),
       });
 
       if (!response.ok) throw new Error("Failed to add book.");
-      fetchAllBooks();
+      await fetchAllBooks(); // Refresh books after adding
       setNewBook({ title: "", author: "", description: "" });
     } catch (error) {
-      setError("Failed to add book. Please try again.");
-      console.error("Error adding book:", error);
+      setError(error.message || "Failed to add book. Please try again.");
     }
   };
 
   // Update an existing book
   const updateBook = async (bookId) => {
     try {
+      const token = localStorage.getItem("authToken");
+      if (!token) throw new Error("Authentication required");
+
       const response = await fetch(`${BASE_URL}/update-book/${bookId}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(editingBook),
       });
 
       if (!response.ok) throw new Error("Failed to update book.");
-      fetchAllBooks();
+      await fetchAllBooks(); // Refresh books after updating
       setEditingBook(null);
     } catch (error) {
-      setError("Failed to update book. Please try again.");
-      console.error("Error updating book:", error);
+      setError(error.message || "Failed to update book. Please try again.");
     }
   };
 
   // Delete a book
   const deleteBook = async (bookId) => {
     try {
-      const response = await fetch(`${BASE_URL}/delete-book/${bookId}`, { method: "DELETE" });
+      const token = localStorage.getItem("authToken");
+      if (!token) throw new Error("Authentication required");
+
+      const response = await fetch(`${BASE_URL}/delete-book/${bookId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       if (!response.ok) throw new Error("Failed to delete book.");
-      fetchAllBooks();
+      await fetchAllBooks(); // Refresh books after deleting
     } catch (error) {
-      setError("Failed to delete book. Please try again.");
-      console.error("Error deleting book:", error);
+      setError(error.message || "Failed to delete book. Please try again.");
     }
   };
 
