@@ -34,7 +34,12 @@ import Exhibitor from './pages/Exhibitor';
 import About from './pages/About'; // Import About page
 import Register from './pages/Register'; // Import Register page
 import Login from './pages/Login';
+
 import AdminDashboard  from './pages/AdminDashboard';
+import ManageExhibitors from './pages/ManageExhibitors';
+import ManageBooks from './pages/ManageBooks';
+import ManageStalls from './pages/ManageStalls';
+
 
 import ExhibitorDashboard from './pages/ExhibitorDashboard';
 import ExhibitorBooks from './pages/ExhibitorBooks';
@@ -63,6 +68,10 @@ const App = () => {
         <Route path='/exhibitor/books' element={<ExhibitorBooks />} />
         <Route path='/exhibitor/register' element={<ExhibitorRegister />} />
         <Route path='/exhibitor/book-stall' element={<BookStall />} />
+        <Route path='/admin/books' element={<ManageStalls />} />
+        <Route path='/admin/stalls' element={<ManageBooks />} />
+        <Route path='/admin/exhibitors' element={<ManageExhibitors />} />
+
       </Routes>
       </div>
       <Footer /> 

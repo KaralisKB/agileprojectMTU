@@ -1,0 +1,32 @@
+.admin-dashboard-container {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .admin-dashboard-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #334e68;
+  }
+  
+  .admin-dashboard-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .admin-link {
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    color: #fff;
+    background-color: #3e5c76;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .admin-link:hover {
+    background-color: #2f4858;
+  }
+  

@@ -1,0 +1,149 @@
+.manage-books-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .manage-books-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+  
+  .add-book-form,
+  .edit-book-form {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-book-form h2,
+  .edit-book-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .add-book-form input,
+  .add-book-form textarea,
+  .edit-book-form input,
+  .edit-book-form textarea {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: #fff;
+  }
+  
+  .add-book-form textarea,
+  .edit-book-form textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .add-book-form button,
+  .edit-book-form button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-book-form button,
+  .edit-book-form .update-button {
+    background-color: #007bff; /* Shared blue background */
+    color: white;
+  }
+  
+  .add-book-form button:hover,
+  .edit-book-form .update-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .edit-book-form .cancel-button {
+    background-color: #6c757d; /* Gray background for Cancel */
+    color: white;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .edit-book-form .cancel-button:hover {
+    background-color: #5a6268;
+  }
+  
+  .book-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .book-item {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .book-item strong {
+    color: #007bff;
+  }
+  
+  .book-item p {
+    margin: 0.5rem 0;
+  }
+  
+  .book-item button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .book-item button.edit {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .book-item button.delete {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .book-item button:hover {
+    opacity: 0.9;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+  }
+  
+  .loading-message {
+    color: #007bff;
+    text-align: center;
+  }
+  
+  .no-books-message {
+    text-align: center;
+    color: #555;
+  }
+  
