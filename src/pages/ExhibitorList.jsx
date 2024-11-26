@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ExhibitorContext } from "../../contexts/ExhibitorContext";
+import { ExhibitorContext } from "../contexts/ExhibitorContext";
 
 const ExhibitorList = () => {
   const { exhibitors } = useContext(ExhibitorContext);
