@@ -15,31 +15,11 @@ const ExhibitorBooks = () => {
     try {
       setLoading(true);
       setError(null);
-
-      const token = localStorage.getItem("token"); // Retrieve the token from localStorage
-      if (!token) {
-        throw new Error("No authentication token found. Please log in.");
-      }
-
-      const response = await fetch(`${BASE_URL}/list-books`, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to fetch books.");
-      }
-
+      const response = await fetch(`${BASE_URL}/list-books`);
       const data = await response.json();
-      if (Array.isArray(data)) {
-        setBooks(data);
-      } else {
-        setBooks([]);
-      }
+      setBooks(data);
     } catch (error) {
-      setError(error.message || "An unexpected error occurred while fetching books.");
+      setError("Failed to fetch books. Please try again.");
       console.error("Error fetching books:", error);
     } finally {
       setLoading(false);
@@ -54,29 +34,17 @@ const ExhibitorBooks = () => {
         return;
       }
 
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No authentication token found. Please log in.");
-      }
-
       const response = await fetch(`${BASE_URL}/create-book`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newBook),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to add book.");
-      }
-
+      if (!response.ok) throw new Error("Failed to add book.");
       fetchAllBooks();
       setNewBook({ title: "", author: "", description: "" });
     } catch (error) {
-      setError(error.message || "An unexpected error occurred while adding the book.");
+      setError("Failed to add book. Please try again.");
       console.error("Error adding book:", error);
     }
   };
@@ -84,34 +52,17 @@ const ExhibitorBooks = () => {
   // Update an existing book
   const updateBook = async (bookId) => {
     try {
-      if (!editingBook.title || !editingBook.author || !editingBook.description) {
-        alert("Please fill out all fields.");
-        return;
-      }
-
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No authentication token found. Please log in.");
-      }
-
       const response = await fetch(`${BASE_URL}/update-book/${bookId}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editingBook),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to update book.");
-      }
-
+      if (!response.ok) throw new Error("Failed to update book.");
       fetchAllBooks();
       setEditingBook(null);
     } catch (error) {
-      setError(error.message || "An unexpected error occurred while updating the book.");
+      setError("Failed to update book. Please try again.");
       console.error("Error updating book:", error);
     }
   };
@@ -119,26 +70,11 @@ const ExhibitorBooks = () => {
   // Delete a book
   const deleteBook = async (bookId) => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No authentication token found. Please log in.");
-      }
-
-      const response = await fetch(`${BASE_URL}/delete-book/${bookId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to delete book.");
-      }
-
+      const response = await fetch(`${BASE_URL}/delete-book/${bookId}`, { method: "DELETE" });
+      if (!response.ok) throw new Error("Failed to delete book.");
       fetchAllBooks();
     } catch (error) {
-      setError(error.message || "An unexpected error occurred while deleting the book.");
+      setError("Failed to delete book. Please try again.");
       console.error("Error deleting book:", error);
     }
   };
