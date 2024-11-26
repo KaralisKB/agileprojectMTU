@@ -1,52 +1,41 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import './LoggedInHeader.css';
-
-
-const BASE_URL = "https://apibookfair.danielefarriciello.dev/api/v1";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoggedInHeader = () => {
   const navigate = useNavigate();
 
-  // Logout function
   const handleLogout = async () => {
+    // Optional: Call the logout API to clear the session on the server
     try {
-      const response = await fetch(`${BASE_URL}/logout`, {
+      const response = await fetch("https://apibookfair.danielefarriciello.dev/api/v1/logout", {
         method: "POST",
-        credentials: "include", // Include cookies for authentication
+        credentials: "include", // Ensure the cookie is sent
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to log out.");
+      if (response.ok) {
+        console.log("Successfully logged out");
+      } else {
+        console.error("Failed to log out");
       }
-
-      // Clear local storage or cookies if necessary
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("userRole");
-
-      // Navigate back to the home page
-      navigate("/");
     } catch (error) {
-      console.error("Logout failed:", error.message);
+      console.error("Error during logout:", error);
     }
+
+    // Clear localStorage
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole');
+
+    // Redirect to the home page
+    navigate('/');
+    window.location.reload(); // Ensure the header switches back to the default one
   };
 
   return (
     <header className="logged-in-header">
-      <div className="header-container">
-        <button className="header-button" onClick={() => navigate("/")}>
-          Home
-        </button>
-        <button
-          className="header-button"
-          onClick={() => navigate("/visitor-dashboard")} // Adjust dashboard route as needed
-        >
-          Dashboard
-        </button>
-        <button className="header-button logout-button" onClick={handleLogout}>
-          Logout
-        </button>
-      </div>
+      <div className="logo" onClick={() => navigate('/')}>International Book Fair</div>
+      <nav className="nav-links">
+        <button onClick={() => navigate('/')} className="nav-button">Home</button>
+        <button onClick={handleLogout} className="nav-button">Log Out</button>
+      </nav>
     </header>
   );
 };
