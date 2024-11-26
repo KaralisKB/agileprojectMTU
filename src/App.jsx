@@ -47,6 +47,13 @@ import BookStall from './pages/BookStall';
 import ExhibitorRegister from './pages/ExhibitorRegister';
 
 import VisitorDashboard from './pages/VisitorDashboard';
+import RulesAndRegulations from './pages/RulesAndRegulations';
+import TicketBooking from './pages/TicketBooking';
+import ExhibitorList from "./pages/ExhibitorList";
+import ExhibitorDetails from "./pages/ExhibitorDetails";
+import BookList from './pages/BookList';
+
+
 import ProtectedRoute from './components/ProtectedRoute';
 
 
@@ -71,6 +78,12 @@ const App = () => {
         <Route path='/admin/books' element={<ManageBooks />} />
         <Route path='/admin/stalls' element={<ManageStalls />} />
         <Route path='/admin/exhibitors' element={<ManageExhibitors />} />
+        <Route path='/visitor/rules' element={<RulesAndRegulations />} />
+        <Route path='/visitor/ticket-booking' element={<TicketBooking />} />
+        <Route path='/visitor/exhibitor-list' element={<ExhibitorList />} />
+        <Route path='/visitor/exhibitor-list/:id' element={<ExhibitorDetails />} />
+        <Route path='/visitor/book-search' element={<BookList />} />
+        
 
       </Routes>
       </div>
