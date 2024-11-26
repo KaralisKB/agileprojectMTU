@@ -15,10 +15,19 @@ const BookList = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(`${BASE_URL}/list-books`);
+
+      const response = await fetch(`${BASE_URL}/list-books`, {
+        method: "GET",
+        credentials: "include", // Include cookies
+      });
+
       if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
         throw new Error("Failed to fetch books.");
       }
+
       const data = await response.json();
       setBooks(data);
       setSelectedBook(null); // Clear selected book when fetching all
@@ -35,10 +44,19 @@ const BookList = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(`${BASE_URL}/book/${bookId}`);
+
+      const response = await fetch(`${BASE_URL}/book/${bookId}`, {
+        method: "GET",
+        credentials: "include", // Include cookies
+      });
+
       if (!response.ok) {
-        throw new Error("Failed to fetch book details.");
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
+        throw new Error(`Failed to fetch book details.`);
       }
+
       const data = await response.json();
       setSelectedBook(data);
     } catch (error) {
@@ -54,10 +72,19 @@ const BookList = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(`${BASE_URL}/search-book-by-name?name=${encodeURIComponent(searchTerm)}`);
+
+      const response = await fetch(`${BASE_URL}/search-book-by-name?name=${encodeURIComponent(searchTerm)}`, {
+        method: "GET",
+        credentials: "include", // Include cookies
+      });
+
       if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
         throw new Error("Failed to search books.");
       }
+
       const data = await response.json();
       setBooks(data);
       setSelectedBook(null); // Clear selected book when searching
@@ -129,7 +156,7 @@ const BookList = () => {
               onClick={() => fetchBookById(book.id)}
               className="book-link"
             >
-              {book.title} {/* Changed from 'name' to 'title' */}
+              {book.title}
             </span>
           </li>
         ))}
@@ -138,7 +165,7 @@ const BookList = () => {
       {/* Display Selected Book Details */}
       {selectedBook && (
         <div className="book-details">
-          <h2>{selectedBook.title}</h2> {/* Changed from 'name' to 'title' */}
+          <h2>{selectedBook.title}</h2>
           <p><strong>Author:</strong> {selectedBook.author}</p>
           <p><strong>Description:</strong> {selectedBook.description}</p>
         </div>
