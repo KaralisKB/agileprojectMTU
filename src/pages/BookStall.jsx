@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { StallContext } from "../../contexts/StallContext";
+import { StallContext } from "../contexts/StallContext";
 import "./BookStall.css";
 
 const BookStall = () => {
