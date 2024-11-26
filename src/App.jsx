@@ -35,7 +35,12 @@ import About from './pages/About'; // Import About page
 import Register from './pages/Register'; // Import Register page
 import Login from './pages/Login';
 import AdminDashboard  from './pages/AdminDashboard';
+
 import ExhibitorDashboard from './pages/ExhibitorDashboard';
+import ExhibitorBooks from './pages/ExhibitorBooks';
+import BookStall from './pages/BookStall';
+import ExhibitorRegister from './pages/ExhibitorRegister';
+
 import VisitorDashboard from './pages/VisitorDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -55,6 +60,9 @@ const App = () => {
         <Route path='/admin-dashboard' element={<ProtectedRoute role ='admin'><AdminDashboard /></ProtectedRoute>}/>
         <Route path='/visitor-dashboard' element={<ProtectedRoute role ='visitor'><VisitorDashboard /></ProtectedRoute>}/>
         <Route path='/exhibitor-dashboard' element={<ProtectedRoute role ='exhibitor'><ExhibitorDashboard /></ProtectedRoute>}/>
+        <Route path='/exhibitor/books' element={<ExhibitorBooks />} />
+        <Route path='/exhibitor/register' element={<ExhibitorRegister />} />
+        <Route path='/exhibitor/book-stall' element={<BookStall />} />
       </Routes>
       </div>
       <Footer /> 
