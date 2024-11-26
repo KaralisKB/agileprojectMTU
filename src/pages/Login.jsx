@@ -1,57 +1,69 @@
 import React, { useState } from "react";
-import api from '../api/axiosInstance';
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 const Login = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const selectUserRole = (type_user_id) => {
     switch (type_user_id) {
       case 1:
-        return 'admin';
+        return "admin";
       case 2:
-        return 'exhibitor';
+        return "exhibitor";
       case 3:
-        return 'visitor';
+        return "visitor";
       default:
-        return 'unknown';
+        return "unknown";
     }
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/login', { email, password });
-      if (response.status === 200) {
-        setMessage('Login was successful');
-        const token = response.data.token;
+      const response = await fetch("https://apibookfair.danielefarriciello.dev/api/v1/login", {
+        method: "POST",
+        credentials: "include", // Include cookies in the request
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-        // Set the token in the headers
-        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
 
-        const userInfo = await api.get('/me');
-        const { type_user_id } = userInfo.data;
+        // Save token and set headers for future requests
+        localStorage.setItem("authToken", token);
+        const userInfoResponse = await fetch("https://apibookfair.danielefarriciello.dev/api/v1/me", {
+          method: "GET",
+          credentials: "include", // Include cookies in the request
+        });
 
-        const role = selectUserRole(type_user_id);
+        if (userInfoResponse.ok) {
+          const userInfo = await userInfoResponse.json();
+          const role = selectUserRole(userInfo.type_user_id);
 
-        localStorage.setItem('userRole', role);
-        localStorage.setItem('isLoggedIn', true);
+          localStorage.setItem("userRole", role);
+          localStorage.setItem("isLoggedIn", true);
 
-        onLogin(); // Trigger state update in App.js
+          // Notify App about login
+          onLogin();
 
-        if (role === 'admin') {
-          navigate('/admin-dashboard');
-        } else if (role === 'visitor') {
-          navigate('/visitor-dashboard');
-        } else if (role === 'exhibitor') {
-          navigate('/exhibitor-dashboard');
+          // Navigate to dashboard
+          if (role === "admin") navigate("/admin-dashboard");
+          if (role === "visitor") navigate("/visitor-dashboard");
+          if (role === "exhibitor") navigate("/exhibitor-dashboard");
         }
+      } else {
+        setMessage("Login failed. Check your credentials.");
       }
     } catch (error) {
-      setMessage('Login failed: ' + (error.response?.data || 'Unknown error'));
+      setMessage("Login failed due to network issues.");
     }
   };
 
@@ -81,14 +93,17 @@ const Login = ({ onLogin }) => {
             required
           />
         </div>
-        <button type="submit" className="login-button">Login</button>
+        <button type="submit" className="login-button">
+          Login
+        </button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className="login-message">{message}</p>}
     </div>
   );
 };
 
 export default Login;
+
 
 
 // import React, { useState } from "react";
