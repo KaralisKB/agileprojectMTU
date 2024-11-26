@@ -1,26 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./ExhibitorDashboard.css";
+import React from 'react';
 
 const ExhibitorDashboard = () => {
-  return (
-    <div className="exhibitor-dashboard-container">
-      <h1>Welcome to the Exhibitor Dashboarddfeefe</h1>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/exhibitor/register">Register as Exhibitor</Link>
-          </li>
-          <li>
-            <Link to="/exhibitor/books">Manage Your Books</Link>
-          </li>
-          <li>
-            <Link to="/exhibitor/book-stall">Book a Stall</Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  );
+  return <div>testing the to the Exhibitor Dashboard</div>;
 };
 
-export default ExhibitorDashboard;
+export default ExhibitorDashboard; 
