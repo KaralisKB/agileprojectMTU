@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header'; // Default Header
 import LoggedInHeader from './components/LoggedInHeader'; // New LoggedInHeader
-import Footer from './components/Footer'; // Ensure Footer is imported
+import Footer from './components/Footer';
 
 import Home from './pages/Home';
 import Visitor from './pages/Visitor';
 import Exhibitor from './pages/Exhibitor';
-import About from './pages/About'; // Import About page
-import Register from './pages/Register'; // Import Register page
+import About from './pages/About';
+import Register from './pages/Register';
 import Login from './pages/Login';
 
 import AdminDashboard from './pages/AdminDashboard';
@@ -31,19 +31,46 @@ import BookList from './pages/BookList';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
-  const isLoggedIn = !!localStorage.getItem('authToken'); // Check if user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    // On app load, check if the user is logged in and their role
+    const token = localStorage.getItem('authToken');
+    const role = localStorage.getItem('userRole');
+    setIsLoggedIn(!!token); // Convert token to boolean
+    setUserRole(role);
+  }, []);
+
+  const handleLogout = () => {
+    // Clear auth-related data and update state
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole');
+    setIsLoggedIn(false);
+    setUserRole(null);
+  };
 
   return (
     <Router>
-      {isLoggedIn ? <LoggedInHeader /> : <Header />} {/* Conditionally render Header */}
+      {isLoggedIn ? (
+        <LoggedInHeader role={userRole} onLogout={handleLogout} />
+      ) : (
+        <Header />
+      )}
       <div className="main-content">
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/visitor" element={<Visitor />} />
           <Route path="/exhibitor" element={<Exhibitor />} />
           <Route path="/about" element={<About />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login onLogin={() => setIsLoggedIn(true)} />}
+          />
+
+          {/* Protected Routes */}
           <Route
             path="/admin-dashboard"
             element={
@@ -68,16 +95,25 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+
+          {/* Exhibitor-Specific Pages */}
           <Route path="/exhibitor/books" element={<ExhibitorBooks />} />
           <Route path="/exhibitor/register" element={<ExhibitorRegister />} />
           <Route path="/exhibitor/book-stall" element={<BookStall />} />
+
+          {/* Admin-Specific Pages */}
           <Route path="/admin/books" element={<ManageBooks />} />
           <Route path="/admin/stalls" element={<ManageStalls />} />
           <Route path="/admin/exhibitors" element={<ManageExhibitors />} />
+
+          {/* Visitor-Specific Pages */}
           <Route path="/visitor/rules" element={<RulesAndRegulations />} />
           <Route path="/visitor/ticket-booking" element={<TicketBooking />} />
           <Route path="/visitor/exhibitor-list" element={<ExhibitorList />} />
-          <Route path="/visitor/exhibitor-list/:id" element={<ExhibitorDetails />} />
+          <Route
+            path="/visitor/exhibitor-list/:id"
+            element={<ExhibitorDetails />}
+          />
           <Route path="/visitor/book-search" element={<BookList />} />
         </Routes>
       </div>
@@ -87,6 +123,7 @@ const App = () => {
 };
 
 export default App;
+
 // // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // // import Header from './components/Header';
 // // import Footer from './components/Footer';
