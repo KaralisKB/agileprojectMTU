@@ -1,33 +1,50 @@
 import React, { createContext, useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const ExhibitorContext = createContext();
 
 export const ExhibitorProvider = ({ children }) => {
   // Load initial data from localStorage
   const [exhibitors, setExhibitors] = useState(() => {
-    const savedExhibitors = localStorage.getItem("approvedExhibitors");
-    return savedExhibitors ? JSON.parse(savedExhibitors) : [];
+    try {
+      const savedExhibitors = localStorage.getItem("approvedExhibitors");
+      return savedExhibitors ? JSON.parse(savedExhibitors) : [];
+    } catch {
+      return [];
+    }
   });
 
   const [pendingExhibitors, setPendingExhibitors] = useState(() => {
-    const savedPending = localStorage.getItem("pendingExhibitors");
-    return savedPending ? JSON.parse(savedPending) : [];
+    try {
+      const savedPending = localStorage.getItem("pendingExhibitors");
+      return savedPending ? JSON.parse(savedPending) : [];
+    } catch {
+      return [];
+    }
   });
 
   // Save to localStorage whenever exhibitors or pendingExhibitors change
   useEffect(() => {
-    localStorage.setItem("approvedExhibitors", JSON.stringify(exhibitors));
+    try {
+      localStorage.setItem("approvedExhibitors", JSON.stringify(exhibitors));
+    } catch (error) {
+      console.error("Failed to save exhibitors to localStorage:", error);
+    }
   }, [exhibitors]);
 
   useEffect(() => {
-    localStorage.setItem("pendingExhibitors", JSON.stringify(pendingExhibitors));
+    try {
+      localStorage.setItem("pendingExhibitors", JSON.stringify(pendingExhibitors));
+    } catch (error) {
+      console.error("Failed to save pending exhibitors to localStorage:", error);
+    }
   }, [pendingExhibitors]);
 
   // Add exhibitor to the pending list
   const addPendingExhibitor = (exhibitor) => {
     setPendingExhibitors((prevPending) => [
       ...prevPending,
-      { ...exhibitor, id: Date.now() },
+      { ...exhibitor, id: uuidv4() },
     ]);
   };
 
@@ -59,6 +76,17 @@ export const ExhibitorProvider = ({ children }) => {
     );
   };
 
+  // Additional functionalities
+  const filterExhibitorsByCategory = (category) => {
+    return exhibitors.filter((exhibitor) => exhibitor.category === category);
+  };
+
+  const searchExhibitorsByName = (name) => {
+    return exhibitors.filter((exhibitor) =>
+      exhibitor.name.toLowerCase().includes(name.toLowerCase())
+    );
+  };
+
   return (
     <ExhibitorContext.Provider
       value={{
@@ -68,6 +96,8 @@ export const ExhibitorProvider = ({ children }) => {
         approveExhibitor,
         declineExhibitor,
         deleteExhibitor,
+        filterExhibitorsByCategory,
+        searchExhibitorsByName,
       }}
     >
       {children}
