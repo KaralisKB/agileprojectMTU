@@ -9,22 +9,30 @@ const ExhibitorBooks = () => {
     title: "",
     author: "",
     description: "",
-    exhibitor_name: "", // Added exhibitor_name
+    exhibitor_name: "",
   });
   const [editingBook, setEditingBook] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch all books
   const fetchAllBooks = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`${BASE_URL}/list-books`);
-      if (!response.ok) throw new Error(`Failed to fetch books: ${response.status}`);
-      const data = await response.json();
+      const response = await fetch(`${BASE_URL}/list-books`, {
+        method: "GET",
+        credentials: "include", // Include cookies
+      });
 
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
+        throw new Error(`Failed to fetch books: ${response.status}`);
+      }
+
+      const data = await response.json();
       setBooks(Array.isArray(data) ? data : []);
     } catch (error) {
       setError(error.message || "Failed to fetch books. Please try again.");
@@ -34,7 +42,6 @@ const ExhibitorBooks = () => {
     }
   };
 
-  // Add a new book
   const addBook = async () => {
     try {
       if (
@@ -49,13 +56,18 @@ const ExhibitorBooks = () => {
 
       const response = await fetch(`${BASE_URL}/create-book`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // Include cookies
         body: JSON.stringify(newBook),
       });
 
-      if (!response.ok) throw new Error("Failed to add book.");
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
+        throw new Error("Failed to add book.");
+      }
+
       await fetchAllBooks();
       setNewBook({ title: "", author: "", description: "", exhibitor_name: "" });
     } catch (error) {
@@ -63,18 +75,22 @@ const ExhibitorBooks = () => {
     }
   };
 
-  // Update an existing book
   const updateBook = async (bookId) => {
     try {
       const response = await fetch(`${BASE_URL}/update-book/${bookId}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // Include cookies
         body: JSON.stringify(editingBook),
       });
 
-      if (!response.ok) throw new Error("Failed to update book.");
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
+        throw new Error("Failed to update book.");
+      }
+
       await fetchAllBooks();
       setEditingBook(null);
     } catch (error) {
@@ -82,21 +98,26 @@ const ExhibitorBooks = () => {
     }
   };
 
-  // Delete a book
   const deleteBook = async (bookId) => {
     try {
       const response = await fetch(`${BASE_URL}/delete-book/${bookId}`, {
         method: "DELETE",
+        credentials: "include", // Include cookies
       });
 
-      if (!response.ok) throw new Error("Failed to delete book.");
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
+        throw new Error("Failed to delete book.");
+      }
+
       await fetchAllBooks();
     } catch (error) {
       setError(error.message || "Failed to delete book. Please try again.");
     }
   };
 
-  // Handle input changes
   const handleInputChange = (e, isEditing = false) => {
     const { name, value } = e.target;
     if (isEditing) {
@@ -186,8 +207,10 @@ const ExhibitorBooks = () => {
             value={editingBook.description}
             onChange={(e) => handleInputChange(e, true)}
           ></textarea>
-          <button className="update-button" onClick={() => updateBook(editingBook.id)}>Update Book</button>
-          <button className="cancel-button" onClick={() => setEditingBook(null)}>Cancel</button>
+          <button onClick={() => updateBook(editingBook.id)}>Update Book</button>
+          <button className="cancel-button" onClick={() => setEditingBook(null)}>
+            Cancel
+          </button>
         </div>
       )}
     </div>

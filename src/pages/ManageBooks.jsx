@@ -5,7 +5,11 @@ const BASE_URL = "https://apibookfair.danielefarriciello.dev/api/v1";
 
 const ManageBooks = () => {
   const [books, setBooks] = useState([]);
-  const [newBook, setNewBook] = useState({ title: "", author: "", description: "" });
+  const [newBook, setNewBook] = useState({
+    title: "",
+    author: "",
+    description: "",
+  });
   const [editingBook, setEditingBook] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,12 +19,24 @@ const ManageBooks = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(`${BASE_URL}/list-books`); 
+
+      const response = await fetch(`${BASE_URL}/list-books`, {
+        method: "GET",
+        credentials: "include", // Include cookies
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
+        throw new Error(`Failed to fetch books: ${response.status}`);
+      }
+
       const data = await response.json();
-      setBooks(data);
+      setBooks(Array.isArray(data) ? data : []);
     } catch (error) {
-      setError("Failed to fetch books. Please try again.");
-      console.error("Error fetching books:", error);
+      setError(error.message || "Failed to fetch books. Please try again.");
+      setBooks([]);
     } finally {
       setLoading(false);
     }
@@ -29,46 +45,78 @@ const ManageBooks = () => {
   // Add a new book
   const addBook = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/create-book`, { // Corrected backticks
+      if (!newBook.title || !newBook.author || !newBook.description) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      const response = await fetch(`${BASE_URL}/create-book`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Include cookies
         body: JSON.stringify(newBook),
       });
-      if (!response.ok) throw new Error("Failed to add book.");
-      fetchAllBooks();
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
+        throw new Error("Failed to add book.");
+      }
+
+      await fetchAllBooks();
       setNewBook({ title: "", author: "", description: "" });
     } catch (error) {
-      setError("Failed to add book. Please try again.");
-      console.error("Error adding book:", error);
+      setError(error.message || "Failed to add book. Please try again.");
     }
   };
 
   // Update a book
   const updateBook = async (bookId) => {
     try {
-      const response = await fetch(`${BASE_URL}/update-book/${bookId}`, { // Corrected backticks
+      const response = await fetch(`${BASE_URL}/update-book/${bookId}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Include cookies
         body: JSON.stringify(editingBook),
       });
-      if (!response.ok) throw new Error("Failed to update book.");
-      fetchAllBooks();
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
+        throw new Error("Failed to update book.");
+      }
+
+      await fetchAllBooks();
       setEditingBook(null);
     } catch (error) {
-      setError("Failed to update book. Please try again.");
-      console.error("Error updating book:", error);
+      setError(error.message || "Failed to update book. Please try again.");
     }
   };
 
   // Delete a book
   const deleteBook = async (bookId) => {
     try {
-      const response = await fetch(`${BASE_URL}/delete-book/${bookId}`, { method: "DELETE" }); // Corrected backticks
-      if (!response.ok) throw new Error("Failed to delete book.");
-      fetchAllBooks();
+      const response = await fetch(`${BASE_URL}/delete-book/${bookId}`, {
+        method: "DELETE",
+        credentials: "include", // Include cookies
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Unauthorized access. Please log in.");
+        }
+        throw new Error("Failed to delete book.");
+      }
+
+      await fetchAllBooks();
     } catch (error) {
-      setError("Failed to delete book. Please try again.");
-      console.error("Error deleting book:", error);
+      setError(error.message || "Failed to delete book. Please try again.");
     }
   };
 
