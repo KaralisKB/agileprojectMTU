@@ -13,9 +13,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';  // Add any global styles here
+import { ExhibitorProvider } from './contexts/ExhibitorContext';
+import { StallProvider } from './contexts/StallContext'; 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <ExhibitorProvider>
+      <StallProvider>
+        <App />
+      </StallProvider>
+    </ExhibitorProvider>
   </React.StrictMode>
 );
