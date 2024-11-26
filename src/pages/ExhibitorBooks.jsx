@@ -5,7 +5,12 @@ const BASE_URL = "https://apibookfair.danielefarriciello.dev/api/v1";
 
 const ExhibitorBooks = () => {
   const [books, setBooks] = useState([]);
-  const [newBook, setNewBook] = useState({ title: "", author: "", description: "" });
+  const [newBook, setNewBook] = useState({
+    title: "",
+    author: "",
+    description: "",
+    exhibitor_name: "", // Added exhibitor_name
+  });
   const [editingBook, setEditingBook] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,10 +25,10 @@ const ExhibitorBooks = () => {
       if (!response.ok) throw new Error(`Failed to fetch books: ${response.status}`);
       const data = await response.json();
 
-      setBooks(data || []); // Ensure books is always an array
+      setBooks(Array.isArray(data) ? data : []);
     } catch (error) {
       setError(error.message || "Failed to fetch books. Please try again.");
-      setBooks([]); // Reset books to an empty array in case of failure
+      setBooks([]);
     } finally {
       setLoading(false);
     }
@@ -32,8 +37,13 @@ const ExhibitorBooks = () => {
   // Add a new book
   const addBook = async () => {
     try {
-      if (!newBook.title || !newBook.author || !newBook.description) {
-        alert("Please fill out all fields.");
+      if (
+        !newBook.title ||
+        !newBook.author ||
+        !newBook.description ||
+        !newBook.exhibitor_name
+      ) {
+        alert("Please fill out all fields, including Exhibitor Name.");
         return;
       }
 
@@ -46,8 +56,8 @@ const ExhibitorBooks = () => {
       });
 
       if (!response.ok) throw new Error("Failed to add book.");
-      await fetchAllBooks(); // Refresh books after adding
-      setNewBook({ title: "", author: "", description: "" });
+      await fetchAllBooks();
+      setNewBook({ title: "", author: "", description: "", exhibitor_name: "" });
     } catch (error) {
       setError(error.message || "Failed to add book. Please try again.");
     }
@@ -65,7 +75,7 @@ const ExhibitorBooks = () => {
       });
 
       if (!response.ok) throw new Error("Failed to update book.");
-      await fetchAllBooks(); // Refresh books after updating
+      await fetchAllBooks();
       setEditingBook(null);
     } catch (error) {
       setError(error.message || "Failed to update book. Please try again.");
@@ -80,7 +90,7 @@ const ExhibitorBooks = () => {
       });
 
       if (!response.ok) throw new Error("Failed to delete book.");
-      await fetchAllBooks(); // Refresh books after deleting
+      await fetchAllBooks();
     } catch (error) {
       setError(error.message || "Failed to delete book. Please try again.");
     }
@@ -128,6 +138,13 @@ const ExhibitorBooks = () => {
           value={newBook.description}
           onChange={(e) => handleInputChange(e)}
         ></textarea>
+        <input
+          type="text"
+          placeholder="Exhibitor Name"
+          name="exhibitor_name"
+          value={newBook.exhibitor_name}
+          onChange={(e) => handleInputChange(e)}
+        />
         <button onClick={addBook}>Add Book</button>
       </div>
 
@@ -138,6 +155,7 @@ const ExhibitorBooks = () => {
             <li key={book.id} className="book-item">
               <strong>{book.title}</strong> by {book.author}
               <p>{book.description}</p>
+              <p><em>{book.exhibitor_name}</em></p>
               <button className="edit" onClick={() => setEditingBook(book)}>Edit</button>
               <button className="delete" onClick={() => deleteBook(book.id)}>Delete</button>
             </li>
