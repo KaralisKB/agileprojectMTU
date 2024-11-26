@@ -42,6 +42,12 @@ const App = () => {
     setUserRole(role);
   }, []);
 
+  const handleLogin = (role) => {
+    // Update state upon login
+    setIsLoggedIn(true);
+    setUserRole(role);
+  };
+
   const handleLogout = () => {
     // Clear auth-related data and update state
     localStorage.removeItem('authToken');
@@ -67,7 +73,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route
             path="/login"
-            element={<Login onLogin={() => setIsLoggedIn(true)} />}
+            element={<Login onLogin={(role) => handleLogin(role)} />}
           />
 
           {/* Protected Routes */}
@@ -123,6 +129,7 @@ const App = () => {
 };
 
 export default App;
+
 
 // // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // // import Header from './components/Header';

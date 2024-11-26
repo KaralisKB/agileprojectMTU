@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './LoggedInHeader.css';
+import './Header.css';
 
-const LoggedInHeader = () => {
+const LoggedInHeader = ({ onLogout }) => {
   const navigate = useNavigate();
   const role = localStorage.getItem('userRole'); // Get the user role from local storage
 
@@ -11,6 +11,9 @@ const LoggedInHeader = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userRole');
     localStorage.removeItem('isLoggedIn');
+
+    // Notify the parent component (App.js) about the logout
+    onLogout();
 
     // Navigate to the home page after logout
     navigate('/');
