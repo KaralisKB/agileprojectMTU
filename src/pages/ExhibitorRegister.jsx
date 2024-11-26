@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { ExhibitorContext } from "../../contexts/ExhibitorContext";
+import { ExhibitorContext } from "../contexts/ExhibitorContext";
 import "./ExhibitorRegister.css";
 
 const ExhibitorRegister = () => {
