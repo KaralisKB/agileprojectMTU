@@ -16,15 +16,7 @@ const ExhibitorBooks = () => {
       setLoading(true);
       setError(null);
 
-      const token = localStorage.getItem("authToken"); // Retrieve token from local storage
-      if (!token) throw new Error("Authentication required");
-
-      const response = await fetch(`${BASE_URL}/list-books`, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Include token in Authorization header
-        },
-      });
-
+      const response = await fetch(`${BASE_URL}/list-books`);
       if (!response.ok) throw new Error(`Failed to fetch books: ${response.status}`);
       const data = await response.json();
 
@@ -45,14 +37,10 @@ const ExhibitorBooks = () => {
         return;
       }
 
-      const token = localStorage.getItem("authToken");
-      if (!token) throw new Error("Authentication required");
-
       const response = await fetch(`${BASE_URL}/create-book`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newBook),
       });
@@ -68,14 +56,10 @@ const ExhibitorBooks = () => {
   // Update an existing book
   const updateBook = async (bookId) => {
     try {
-      const token = localStorage.getItem("authToken");
-      if (!token) throw new Error("Authentication required");
-
       const response = await fetch(`${BASE_URL}/update-book/${bookId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(editingBook),
       });
@@ -91,14 +75,8 @@ const ExhibitorBooks = () => {
   // Delete a book
   const deleteBook = async (bookId) => {
     try {
-      const token = localStorage.getItem("authToken");
-      if (!token) throw new Error("Authentication required");
-
       const response = await fetch(`${BASE_URL}/delete-book/${bookId}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       if (!response.ok) throw new Error("Failed to delete book.");
