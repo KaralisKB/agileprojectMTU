@@ -77,7 +77,7 @@ export const ExhibitorProvider = ({ children }) => {
         pendingExhibitors,
         addPendingExhibitor,
         approveExhibitor,
-        declineExhibitor, // Ensure this is included
+        declineExhibitor, 
         deleteExhibitor,
       }}
     >
