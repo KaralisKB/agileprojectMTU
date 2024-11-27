@@ -222,7 +222,6 @@ const TicketBooking = () => {
           <div className="popup-container">
             <h3>Your Booking Has Been Confirmed!</h3>
             <p>Tickets are available at your email!</p>
-            <p>Selected Date: {formData.date}</p>
             <p>See you there!</p>
             <button className="popup-close-button" onClick={closePopup}>
               Close
