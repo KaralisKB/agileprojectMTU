@@ -4,7 +4,7 @@ import "./ExhibitorDashboard.css";
 
 const ExhibitorDashboard = () => {
   return (
-    <div className="exhibitor-dashboard">
+    <div className="admin-dashboard">
       <h1 className="dashboard-title">Welcome to the Exhibitor Dashboard</h1>
       <div className="dashboard-options">
         <div className="option-card">
