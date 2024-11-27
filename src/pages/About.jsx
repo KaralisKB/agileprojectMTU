@@ -8,7 +8,7 @@ const About = () => {
       <section className="about-section">
         <h1 className="about-title">About the International Book Fair</h1>
         <p className="about-description">
-          The International Book Fair is an annual cultural event held in Cork, Ireland, bringing together book enthusiasts, publishers, and renowned authors from around the world. This fair celebrates the world of literature, art, and cultural exchange, offering visitors the opportunity to discover new books, attend reading workshops, and participate in exciting seminars and book signing events. We aim to promote local reading culture and encourage a love for literature in all its forms.
+          The International Book Fair is an annual cultural event held in Pairc Ui Chaoimh, Cork, Ireland & Cork City Hall, Cork, Ireland, once annually organized by the Enterprise Ireland and Higher Education Ireland, bringing together book enthusiasts, publishers, and renowned authors from around the world. This fair celebrates the world of literature, art, and cultural exchange, offering visitors the opportunity to discover new books, attend reading workshops, and participate in exciting seminars and book signing events. We aim to promote local reading culture and encourage a love for literature in all its forms.
         </p>
       </section>
 
