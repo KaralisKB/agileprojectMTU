@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ExhibitorContext } from "../contexts/ExhibitorContext";
 import { StallContext } from "../contexts/StallContext";
+import "./ExhibitorList.css"; // Link the CSS file
 
 const BASE_URL = "https://apibookfair.danielefarriciello.dev/api/v1";
 
@@ -64,7 +65,7 @@ const ExhibitorList = () => {
 
   return (
     <div className="exhibitor-list-container">
-      <h1>Exhibitor List</h1>
+      <h1 className="exhibitor-list-title">Exhibitor List</h1>
       {loading && <p>Loading...</p>}
       {error && <p className="error">{error}</p>}
 
@@ -78,19 +79,23 @@ const ExhibitorList = () => {
                 className="exhibitor-summary"
                 onClick={() => toggleExhibitorDetails(exhibitor.name)}
               >
-                <strong>{exhibitor.name}</strong>
-                <span> - Stall Number: {getStallByExhibitor(exhibitor.name)}</span>
+                <strong className="exhibitor-name">{exhibitor.name}</strong>
+                <span className="stall-number">Stall Number: {getStallByExhibitor(exhibitor.name)}</span>
               </div>
 
               {expandedExhibitor === exhibitor.name && (
                 <div className="exhibitor-details">
-                  <p><strong>Category:</strong> {exhibitor.category}</p>
-                  <p><strong>Contact:</strong> {exhibitor.contact}</p>
+                  <p>
+                    <strong>Category:</strong> {exhibitor.category}
+                  </p>
+                  <p>
+                    <strong>Contact:</strong> {exhibitor.contact}
+                  </p>
                   <h4>Books:</h4>
-                  <ul>
+                  <ul className="books-list">
                     {getBooksByExhibitor(exhibitor.name).length > 0 ? (
                       getBooksByExhibitor(exhibitor.name).map((book) => (
-                        <li key={book.id}>
+                        <li key={book.id} className="book-item">
                           <strong>{book.title}</strong> by {book.author}
                           <p>{book.description}</p>
                         </li>
