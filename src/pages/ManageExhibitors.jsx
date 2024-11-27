@@ -3,47 +3,47 @@ import { ExhibitorContext } from "../contexts/ExhibitorContext";
 import "./ManageExhibitors.css";
 
 const ManageExhibitors = () => {
-  const { exhibitors, pendingExhibitors, approveExhibitor, deleteExhibitor } =
+  const { exhibitors, pendingExhibitors, approveExhibitor, declineExhibitor, deleteExhibitor } =
     useContext(ExhibitorContext);
 
   return (
     <div className="exhibitor-management-container">
       <h1>Manage Exhibitors</h1>
 
-{/* Pending Exhibitors */}
-<div className="pending-exhibitors">
-  <h2>Pending Exhibitors</h2>
-  {pendingExhibitors.length === 0 ? (
-    <p>No pending exhibitors.</p>
-  ) : (
-    <ul>
-      {pendingExhibitors.map((exhibitor) => (
-        <li key={exhibitor.id} className="exhibitor-item">
-          <strong>{exhibitor.name}</strong> - {exhibitor.category} -{" "}
-          {exhibitor.contact}
-          <button
-            className="approve-button"
-            onClick={() => {
-              console.log("Approving:", exhibitor.id);
-              approveExhibitor(exhibitor.id);
-            }}
-          >
-            Approve
-          </button>
-          <button
-            className="decline-button"
-            onClick={() => {
-              console.log("Declining:", exhibitor.id);
-              declineExhibitor(exhibitor.id);
-            }}
-          >
-            Decline
-          </button>
-        </li>
-      ))}
-    </ul>
-  )}
-</div>
+      {/* Pending Exhibitors */}
+      <div className="pending-exhibitors">
+        <h2>Pending Exhibitors</h2>
+        {pendingExhibitors.length === 0 ? (
+          <p>No pending exhibitors.</p>
+        ) : (
+          <ul>
+            {pendingExhibitors.map((exhibitor) => (
+              <li key={exhibitor.id} className="exhibitor-item">
+                <strong>{exhibitor.name}</strong> - {exhibitor.category} -{" "}
+                {exhibitor.contact}
+                <button
+                  className="approve-button"
+                  onClick={() => {
+                    console.log("Approving:", exhibitor.id);
+                    approveExhibitor(exhibitor.id);
+                  }}
+                >
+                  Approve
+                </button>
+                <button
+                  className="decline-button"
+                  onClick={() => {
+                    console.log("Declining:", exhibitor.id);
+                    declineExhibitor(exhibitor.id);
+                  }}
+                >
+                  Decline
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       {/* Approved Exhibitors */}
       <div className="approved-exhibitors">
