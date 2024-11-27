@@ -9,12 +9,9 @@ const ExhibitorRegister = () => {
     category: "",
     contact: "",
     company: "",
-  });
-
-  const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
-    expiryDate: "",
     cvv: "",
+    expiry: "",
   });
 
   const handleInputChange = (e) => {
@@ -22,27 +19,24 @@ const ExhibitorRegister = () => {
     setNewExhibitor({ ...newExhibitor, [name]: value });
   };
 
-  const handleCardChange = (e) => {
-    const { name, value } = e.target;
-    setCardDetails({ ...cardDetails, [name]: value });
-  };
-
   const handleRegister = () => {
-    if (
-      newExhibitor.name &&
-      newExhibitor.category &&
-      newExhibitor.contact &&
-      newExhibitor.company &&
-      cardDetails.cardNumber &&
-      cardDetails.expiryDate &&
-      cardDetails.cvv
-    ) {
-      addPendingExhibitor({ ...newExhibitor });
-      setNewExhibitor({ name: "", category: "", contact: "", company: "" });
-      setCardDetails({ cardNumber: "", expiryDate: "", cvv: "" });
+    const { name, category, contact, company, cardNumber, cvv, expiry } =
+      newExhibitor;
+
+    if (name && category && contact && company && cardNumber && cvv && expiry) {
+      addPendingExhibitor({ name, category, contact, company });
+      setNewExhibitor({
+        name: "",
+        category: "",
+        contact: "",
+        company: "",
+        cardNumber: "",
+        cvv: "",
+        expiry: "",
+      });
       alert("Your registration is submitted and pending approval!");
     } else {
-      alert("Please fill out all fields, including card details!");
+      alert("Please fill out all fields!");
     }
   };
 
@@ -82,22 +76,22 @@ const ExhibitorRegister = () => {
         type="text"
         placeholder="Card Number"
         name="cardNumber"
-        value={cardDetails.cardNumber}
-        onChange={handleCardChange}
-      />
-      <input
-        type="text"
-        placeholder="Expiry Date (MM/YY)"
-        name="expiryDate"
-        value={cardDetails.expiryDate}
-        onChange={handleCardChange}
+        value={newExhibitor.cardNumber}
+        onChange={handleInputChange}
       />
       <input
         type="text"
         placeholder="CVV"
         name="cvv"
-        value={cardDetails.cvv}
-        onChange={handleCardChange}
+        value={newExhibitor.cvv}
+        onChange={handleInputChange}
+      />
+      <input
+        type="text"
+        placeholder="Expiry Date (MM/YY)"
+        name="expiry"
+        value={newExhibitor.expiry}
+        onChange={handleInputChange}
       />
       <button onClick={handleRegister}>Submit Registration</button>
       <p className="refund-info">
