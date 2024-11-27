@@ -36,7 +36,7 @@ ul {
   margin: 0;
 }
 
-li {
+/* li {
   padding: 1rem;
   margin-bottom: 1rem;
   border: 1px solid #dcdcdc;
@@ -46,7 +46,7 @@ li {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+} */
 
 li strong {
   font-size: 1.1rem;
@@ -59,19 +59,15 @@ li span {
   color: #555;
   margin-right: auto;
 }
-
 button {
-  width: 120px; /* Fixed button width */
-  height: 40px; /* Fixed button height */
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.6rem; /* Smaller padding for smaller buttons */
   border: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  text-align: center;
-  margin-left: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem; /* Smaller font size */
   font-weight: bold;
+  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block; /* Ensure consistent inline sizing */
 }
 
 button:active {
@@ -97,13 +93,21 @@ button:active {
 }
 
 .delete-button {
-  background-color: #007bff;
+  background-color: #dc3545;
   color: white;
 }
 
 .delete-button:hover {
-  background-color: #0056b3;
+  background-color: #c82333;
 }
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem; /* Add spacing between text and buttons */
+}
+
 
 .no-items-message {
   text-align: center;
