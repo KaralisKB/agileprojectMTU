@@ -7,6 +7,7 @@ const TicketBooking = () => {
     name: "",
     email: "",
     phone: "",
+    date: "", // Add date field
     adultTickets: 0,
     childTickets: 0,
     morningTickets: 0,
@@ -41,28 +42,27 @@ const TicketBooking = () => {
 
   const handleConfirmBooking = (e) => {
     e.preventDefault();
-    // Calculate total price
     const totalPrice = calculateTotalPrice();
 
     // Prepare the email template parameters
     const emailParams = {
-      to_name: formData.name,            // Matches {{to_name}}
-      from_name: "Book Fair Team",       // Matches {{from_name}}
-      reply_to: formData.email,          // Matches {{reply_to}}
-      phone: formData.phone,             // Matches {{phone}}
-      adult_tickets: formData.adultTickets, // Matches {{adult_tickets}}
-      child_tickets: formData.childTickets, // Matches {{child_tickets}}
-      morning_tickets: formData.morningTickets, // Matches {{morning_tickets}}
-      total_price: totalPrice            // Matches {{total_price}}
+      to_name: formData.name,
+      from_name: "Book Fair Team",
+      reply_to: formData.email,
+      phone: formData.phone,
+      date: formData.date, // Include the selected date in the email
+      adult_tickets: formData.adultTickets,
+      child_tickets: formData.childTickets,
+      morning_tickets: formData.morningTickets,
+      total_price: totalPrice,
     };
-    
 
     // Send the email using EmailJS
     emailjs
       .send(
         "service_37yphzp", // Replace with your Service ID
         "template_xqt65it", // Replace with your Template ID
-        emailParams, // Parameters matching placeholders in the template
+        emailParams,
         "mGNlosJ3yb5Y5ysXJ" // Replace with your Public Key
       )
       .then(
@@ -81,6 +81,7 @@ const TicketBooking = () => {
       name: "",
       email: "",
       phone: "",
+      date: "",
       adultTickets: 0,
       childTickets: 0,
       morningTickets: 0,
@@ -128,6 +129,22 @@ const TicketBooking = () => {
           onChange={handleInputChange}
           required
         />
+
+        <label htmlFor="date">Select Date:</label>
+        <select
+          id="date"
+          name="date"
+          value={formData.date}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="">-- Select a date --</option>
+          <option value="18th July">18th July</option>
+          <option value="19th July">19th July</option>
+          <option value="20th July">20th July</option>
+          <option value="21st July">21st July</option>
+          <option value="22nd July">22nd July</option>
+        </select>
 
         <label htmlFor="adultTickets">Adult Tickets (€5):</label>
         <input
@@ -205,6 +222,7 @@ const TicketBooking = () => {
           <div className="popup-container">
             <h3>Your Booking Has Been Confirmed!</h3>
             <p>Tickets are available at your email!</p>
+            <p>Selected Date: {formData.date}</p>
             <p>See you there!</p>
             <button className="popup-close-button" onClick={closePopup}>
               Close
