@@ -36,7 +36,8 @@ const Home = () => {
   <div className="popup-overlay">
     <div className="popup">
       <h2>Schedule of Events</h2>
-      <p><strong>Date:</strong> 18th July & 22nd July</p>
+      <p><strong>Date:</strong> 18th July - 22nd July</p>
+      <p><strong>Location:</strong> Pairc Ui Chaoimh, Cork, Ireland & Cork City Hall, Cork, Ireland</p>
       <p><strong>Opening Times:</strong> 8:00 AM - 9:00 PM</p>
       <p><strong>Note:</strong> Exhibitor stalls are open all day long.</p>
       <h3>Events:</h3>
