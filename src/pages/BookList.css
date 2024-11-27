@@ -68,7 +68,7 @@
   .sort-button {
     padding: 10px 20px;
     border: none;
-    background-color: #007bff;
+    background-color: #334e68;
     color: white;
     font-weight: bold;
     border-radius: 5px;
@@ -77,10 +77,10 @@
   }
   
   .sort-button.active {
-    background-color: #0056b3;
+    background-color: #3e5c76;
   }
   
   .sort-button:hover {
-    background-color: #0056b3;
+    background-color: #3e5c76;
   }
   
