@@ -3,12 +3,12 @@
 .visitor-dashboard {
     text-align: center;
     padding: 50px 20px;
-    background-color: #f8f9fa; /* Keep a subtle background color for the section */
+    background-color: #f0f4f8; /* Keep a subtle background color for the section */
   }
   
   .dashboard-title {
     font-size: 2.5rem;
-    color: #2c3e50;
+    color: #334e68;
     margin-bottom: 40px;
   }
   

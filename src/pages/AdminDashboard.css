@@ -1,32 +1,80 @@
-.admin-dashboard-container {
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    text-align: center;
+.admin-dashboard {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f0f4f8; /* Keep a subtle background color for the section */
+}
+
+.dashboard-title {
+  font-size: 2.5rem;
+  color: #334e68;
+  margin-bottom: 40px;
+}
+
+.dashboard-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
+  gap: 40px; /* Space between cards */
+  max-width: 1200px; /* Max container width */
+  margin: 0 auto; /* Center the grid */
+}
+
+/* Style for each card */
+.option-card {
+  background-color: transparent; /* Remove background color */
+  border: 1px solid #dcdcdc; /* Optional: Add a light border */
+  border-radius: 10px;
+  padding: 40px; /* Bigger padding */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.option-card h2 {
+  font-size: 1.5rem; /* Bigger font size */
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* Add hover effects */
+.option-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+}
+
+/* Button Styling */
+.action-button {
+  background: #1e90ff;
+  color: white;
+  text-decoration: none;
+  padding: 15px 30px; /* Larger buttons */
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  transition: background 0.3s, color 0.3s;
+}
+
+.action-button:hover {
+  background: #4682b4;
+}
+
+/* Ensure responsive layout */
+@media (max-width: 768px) {
+  .dashboard-options {
+    grid-template-columns: 1fr; /* Stack cards on smaller screens */
   }
-  
-  .admin-dashboard-title {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #334e68;
+
+  .option-card {
+    padding: 20px; /* Reduce padding */
   }
-  
-  .admin-dashboard-navigation {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
+
+  .action-button {
+    padding: 10px 20px; /* Adjust button size */
+    font-size: 0.9rem;
   }
-  
-  .admin-link {
-    padding: 0.8rem 1.5rem;
-    text-decoration: none;
-    color: #fff;
-    background-color: #3e5c76;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  .admin-link:hover {
-    background-color: #2f4858;
-  }
-  
+}
