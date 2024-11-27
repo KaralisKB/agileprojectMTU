@@ -3,7 +3,7 @@
 .visitor-dashboard {
     text-align: center;
     padding: 50px 20px;
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Keep a subtle background color for the section */
   }
   
   .dashboard-title {
@@ -18,19 +18,15 @@
     gap: 40px; /* Space between cards */
     max-width: 1200px; /* Max container width */
     margin: 0 auto; /* Center the grid */
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 15px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
   }
   
   /* Style for each card */
   .option-card {
-    background-color: #fefefe;
-    border: 1px solid #dcdcdc;
+    background-color: transparent; /* Remove background color */
+    border: 1px solid #dcdcdc; /* Optional: Add a light border */
     border-radius: 10px;
     padding: 40px; /* Bigger padding */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
@@ -48,6 +44,7 @@
   .option-card:hover {
     transform: translateY(-5px);
     box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
   }
   
   /* Button Styling */
