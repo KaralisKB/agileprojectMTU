@@ -23,13 +23,19 @@ const ManageExhibitors = () => {
           {exhibitor.contact}
           <button
             className="approve-button"
-            onClick={() => approveExhibitor(exhibitor.id)}
+            onClick={() => {
+              console.log("Approving:", exhibitor.id);
+              approveExhibitor(exhibitor.id);
+            }}
           >
             Approve
           </button>
           <button
             className="decline-button"
-            onClick={() => declineExhibitor(exhibitor.id)}
+            onClick={() => {
+              console.log("Declining:", exhibitor.id);
+              declineExhibitor(exhibitor.id);
+            }}
           >
             Decline
           </button>
