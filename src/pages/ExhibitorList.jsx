@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ExhibitorContext } from "../contexts/ExhibitorContext";
 import { StallContext } from "../contexts/StallContext";
-import "./ExhibitorList.css"; // Link the CSS file
+import "./ExhibitorList.css";
 
 const BASE_URL = "https://apibookfair.danielefarriciello.dev/api/v1";
 
@@ -11,9 +11,8 @@ const ExhibitorList = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [expandedExhibitor, setExpandedExhibitor] = useState(null); // Track expanded exhibitor
+  const [expandedExhibitor, setExpandedExhibitor] = useState(null);
 
-  // Fetch all books
   const fetchBooks = async () => {
     try {
       setLoading(true);
@@ -21,7 +20,7 @@ const ExhibitorList = () => {
 
       const response = await fetch(`${BASE_URL}/list-books`, {
         method: "GET",
-        credentials: "include", // Include cookies for authentication
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -37,12 +36,10 @@ const ExhibitorList = () => {
     }
   };
 
-  // Group books by exhibitor name
   const getBooksByExhibitor = (exhibitorName) => {
     return books.filter((book) => book.exhibitor_name === exhibitorName);
   };
 
-  // Find the stall number assigned to an exhibitor
   const getStallByExhibitor = (exhibitorName) => {
     const stall = stalls.find(
       (stall) => stall.assigned && stall.exhibitor?.name === exhibitorName
@@ -50,13 +47,10 @@ const ExhibitorList = () => {
     return stall ? stall.number : "N/A";
   };
 
-  // Toggle expanded exhibitor
   const toggleExhibitorDetails = (exhibitorName) => {
-    if (expandedExhibitor === exhibitorName) {
-      setExpandedExhibitor(null); // Collapse details if clicked again
-    } else {
-      setExpandedExhibitor(exhibitorName); // Expand details
-    }
+    setExpandedExhibitor((prev) =>
+      prev === exhibitorName ? null : exhibitorName
+    );
   };
 
   useEffect(() => {
@@ -74,36 +68,47 @@ const ExhibitorList = () => {
       ) : (
         <ul className="exhibitor-list">
           {exhibitors.map((exhibitor) => (
-            <li key={exhibitor.id} className="exhibitor-item">
+            <li
+              key={exhibitor.id}
+              className={`exhibitor-item ${
+                expandedExhibitor === exhibitor.name ? "expanded" : ""
+              }`}
+            >
               <div
                 className="exhibitor-summary"
                 onClick={() => toggleExhibitorDetails(exhibitor.name)}
               >
-                <strong className="exhibitor-name">{exhibitor.name}</strong>
-                <span className="stall-number">Stall Number: {getStallByExhibitor(exhibitor.name)}</span>
+                <h2 className="exhibitor-name">{exhibitor.name}</h2>
+                <p className="stall-number">
+                  <span>Stall Number:</span> {getStallByExhibitor(exhibitor.name)}
+                </p>
               </div>
 
               {expandedExhibitor === exhibitor.name && (
                 <div className="exhibitor-details">
-                  <p>
-                    <strong>Category:</strong> {exhibitor.category}
-                  </p>
-                  <p>
-                    <strong>Contact:</strong> {exhibitor.contact}
-                  </p>
-                  <h4>Books:</h4>
-                  <ul className="books-list">
-                    {getBooksByExhibitor(exhibitor.name).length > 0 ? (
-                      getBooksByExhibitor(exhibitor.name).map((book) => (
-                        <li key={book.id} className="book-item">
-                          <strong>{book.title}</strong> by {book.author}
-                          <p>{book.description}</p>
-                        </li>
-                      ))
-                    ) : (
-                      <p>No books added by this exhibitor.</p>
-                    )}
-                  </ul>
+                  <div className="details-section">
+                    <p>
+                      <strong>Category:</strong> {exhibitor.category}
+                    </p>
+                    <p>
+                      <strong>Contact:</strong> {exhibitor.contact}
+                    </p>
+                  </div>
+                  <div className="books-section">
+                    <h4>Books:</h4>
+                    <ul>
+                      {getBooksByExhibitor(exhibitor.name).length > 0 ? (
+                        getBooksByExhibitor(exhibitor.name).map((book) => (
+                          <li key={book.id} className="book-item">
+                            <strong>{book.title}</strong> by {book.author}
+                            <p>{book.description}</p>
+                          </li>
+                        ))
+                      ) : (
+                        <p>No books added by this exhibitor.</p>
+                      )}
+                    </ul>
+                  </div>
                 </div>
               )}
             </li>
@@ -115,6 +120,7 @@ const ExhibitorList = () => {
 };
 
 export default ExhibitorList;
+
 
 
 // import React, { useContext, useEffect, useState } from "react";
