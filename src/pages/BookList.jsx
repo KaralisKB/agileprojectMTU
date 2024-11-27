@@ -5,11 +5,12 @@ const BookList = () => {
   const BASE_URL = "https://apibookfair.danielefarriciello.dev/api/v1";
 
   const [books, setBooks] = useState([]);
+  const [originalBooks, setOriginalBooks] = useState([]); // Store original order
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [sortOrder, setSortOrder] = useState("asc"); // Track sort order
+  const [sortOrder, setSortOrder] = useState(null); // Track sort order
 
   // Fetch all books
   const fetchAllBooks = async () => {
@@ -31,72 +32,11 @@ const BookList = () => {
 
       const data = await response.json();
       setBooks(data);
+      setOriginalBooks(data); // Save the original book list
       setSelectedBook(null); // Clear selected book when fetching all
     } catch (error) {
       setError(error.message || "Failed to fetch books. Please try again.");
       console.error("Error fetching books:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Fetch book by ID
-  const fetchBookById = async (bookId) => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const response = await fetch(`${BASE_URL}/book/${bookId}`, {
-        method: "GET",
-        credentials: "include", // Include cookies
-      });
-
-      if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error("Unauthorized access. Please log in.");
-        }
-        throw new Error(`Failed to fetch book details.`);
-      }
-
-      const data = await response.json();
-      setSelectedBook(data);
-    } catch (error) {
-      setError(error.message || `Failed to fetch book with ID ${bookId}.`);
-      console.error(`Error fetching book with ID ${bookId}:`, error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Search books by name
-  const searchBooksByName = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const response = await fetch(
-        `${BASE_URL}/search-book-by-name?name=${encodeURIComponent(
-          searchTerm
-        )}`,
-        {
-          method: "GET",
-          credentials: "include", // Include cookies
-        }
-      );
-
-      if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error("Unauthorized access. Please log in.");
-        }
-        throw new Error("Failed to search books.");
-      }
-
-      const data = await response.json();
-      setBooks(data);
-      setSelectedBook(null); // Clear selected book when searching
-    } catch (error) {
-      setError(error.message || "Failed to search books. Please try again.");
-      console.error("Error searching books:", error);
     } finally {
       setLoading(false);
     }
@@ -115,6 +55,12 @@ const BookList = () => {
     setSortOrder(order);
   };
 
+  // Reset to default order
+  const resetToDefaultOrder = () => {
+    setBooks(originalBooks);
+    setSortOrder(null); // Clear the sort order
+  };
+
   // Handle search input change
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -124,7 +70,11 @@ const BookList = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      searchBooksByName();
+      const filteredBooks = originalBooks.filter((book) =>
+        book.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setBooks(filteredBooks);
+      setSortOrder(null); // Reset sorting if search is performed
     }
   };
 
@@ -180,6 +130,12 @@ const BookList = () => {
         >
           Sort Z-A
         </button>
+        <button
+          onClick={resetToDefaultOrder}
+          className={`sort-button ${sortOrder === null ? "active" : ""}`}
+        >
+          Default
+        </button>
       </div>
 
       {/* Loading and Error Messages */}
@@ -193,7 +149,7 @@ const BookList = () => {
       <ul className="book-list">
         {books.map((book) => (
           <li key={book.id} className="book-item">
-            <span onClick={() => fetchBookById(book.id)} className="book-link">
+            <span onClick={() => setSelectedBook(book)} className="book-link">
               {book.title}
             </span>
           </li>
