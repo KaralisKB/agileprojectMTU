@@ -1,16 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './VisitorDashboard.css'; // Updated CSS file
 
 const VisitorDashboard = () => {
   return (
     <div className="visitor-dashboard">
-      <h1>Welcome to the Visitor Dashboard</h1>
-      <ul>
-        <li><Link to="/visitor/ticket-booking">Book Admission Tickets</Link></li>
-        <li><Link to="/visitor/exhibitor-list">View Exhibitors</Link></li>
-        <li><Link to="/visitor/rules">Rules and Regulations</Link></li>
-        <li><Link to="/visitor/book-search">Browse and Search Books</Link></li>
-      </ul>
+      <h1 className="dashboard-title">Welcome to the Visitor Dashboard</h1>
+      <div className="dashboard-options">
+        <div className="option-card">
+          <h2>Book Admission Tickets</h2>
+          <Link to="/visitor/ticket-booking" className="action-button">
+            Book Now
+          </Link>
+        </div>
+        <div className="option-card">
+          <h2>View Exhibitors</h2>
+          <Link to="/visitor/exhibitor-list" className="action-button">
+            Explore
+          </Link>
+        </div>
+        <div className="option-card">
+          <h2>Rules and Regulations</h2>
+          <Link to="/visitor/rules" className="action-button">
+            View Rules
+          </Link>
+        </div>
+        <div className="option-card">
+          <h2>Browse and Search Books</h2>
+          <Link to="/visitor/book-search" className="action-button">
+            Browse
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

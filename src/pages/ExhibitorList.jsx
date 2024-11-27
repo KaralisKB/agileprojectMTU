@@ -74,15 +74,11 @@ const ExhibitorList = () => {
                 expandedExhibitor === exhibitor.name ? "expanded" : ""
               }`}
             >
-              <div
-                className="exhibitor-summary"
-                onClick={() => toggleExhibitorDetails(exhibitor.name)}
-              >
-                <h2 className="exhibitor-name">{exhibitor.name}</h2>
-                <p className="stall-number">
-                  <span>Stall Number:</span> {getStallByExhibitor(exhibitor.name)}
-                </p>
-              </div>
+<div className="exhibitor-summary" onClick={() => toggleExhibitorDetails(exhibitor.name)}>
+  <h2 className="exhibitor-name">{exhibitor.name}</h2>
+  <span className="stall-number"> - Stall Number: {getStallByExhibitor(exhibitor.name)}</span>
+</div>
+
 
               {expandedExhibitor === exhibitor.name && (
                 <div className="exhibitor-details">
@@ -100,8 +96,7 @@ const ExhibitorList = () => {
                       {getBooksByExhibitor(exhibitor.name).length > 0 ? (
                         getBooksByExhibitor(exhibitor.name).map((book) => (
                           <li key={book.id} className="book-item">
-                            <strong>{book.title}</strong> by {book.author}
-                            <p>{book.description}</p>
+                            <strong>{book.title} </strong> by {book.author}
                           </li>
                         ))
                       ) : (
