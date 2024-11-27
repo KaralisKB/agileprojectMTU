@@ -1,73 +1,13 @@
 .header {
-    background-color: #334e68;
-    padding: 1.5rem 3rem;  /* Increased padding for a more prominent header */
-    color: white;
-  }
-  
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .header-title {
-    font-size: 2.4rem;  /* Increased font size for a more prominent look */
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    color: #f0f4f8;
-  }
-  
-  .header-nav {
-    display: flex;
-    gap: 2rem;  /* Increased gap for better separation between nav items */
-  }
-  
-  .nav-link {
-    color: #f0f4f8;
-    text-decoration: none;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;  /* Increased font weight for a more defined link */
-    font-size: 1.2rem;  /* Increased font size for better readability */
-    transition: color 0.3s, background-color 0.3s, transform 0.2s;
-    padding: 0.7rem 1.2rem;  /* Increased padding for a larger clickable area */
-    border-radius: 6px;
-  }
-  
-  .nav-link:hover {
-    color: #ffffff;
-    background-color: #3e5c76;
-    transform: translateY(-2px);
-  }
-  
-
-  .auth-links {
-    margin-left: auto;
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .auth-link {
-    padding: 0.5rem 1rem;
-    border: 2px solid #f0f4f8;
-    border-radius: 6px;
-    text-decoration: none;
-    color: #f0f4f8;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.auth-link:hover {
-    background-color: #f0f4f8; 
-    color: #334e68; 
+  background-color: #334e68; /* Main header background color */
+  padding: 1.5rem 3rem; /* Adjusted padding for uniform look */
+  color: white;
 }
 
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #2c3e50; /* Matches the theme */
-  color: white;
 }
 
 .header-left {
@@ -76,15 +16,17 @@
 }
 
 .header-title {
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: 2.4rem; /* Prominent title size */
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  color: #f0f4f8;
   margin: 0;
-  color: #ffffff;
 }
 
 .header-details {
-  font-size: 0.9rem;
-  color: #dcdcdc;
+  font-size: 1rem;
+  color: #dcdcdc; /* Subtle color for details */
+  margin-top: 5px;
 }
 
 .header-dates,
@@ -94,24 +36,57 @@
 
 .header-nav {
   display: flex;
-  gap: 15px;
+  gap: 1.5rem; /* Space between nav links */
 }
 
 .nav-link {
+  color: #f0f4f8;
   text-decoration: none;
-  color: white;
-  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: color 0.3s, background-color 0.3s, transform 0.2s;
+  padding: 0.7rem 1.2rem; /* Consistent padding for clickable area */
+  border-radius: 6px;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+  background-color: #3e5c76; /* Subtle hover background */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.auth-links {
+  display: flex;
+  gap: 1rem; /* Space between login and register */
+}
+
+.auth-link {
+  padding: 0.5rem 1rem;
+  border: 2px solid #f0f4f8;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #f0f4f8;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.auth-link:hover {
+  background-color: #f0f4f8;
+  color: #334e68;
 }
 
 .logout-button {
-  background-color: #000000;
-  color: #ffffff;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
+  background-color: transparent;
+  border: 2px solid #f0f4f8;
+  color: #f0f4f8;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .logout-button:hover {
-  background-color: #444444;
+  background-color: #f0f4f8;
+  color: #334e68;
 }
