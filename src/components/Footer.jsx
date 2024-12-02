@@ -10,7 +10,7 @@ const Footer = () => {
 
     if (!chatbotVisible) {
       try {
-        const response = await fetch("https://your-api-url.com/api/v1/chat-bot", {
+        const response = await fetch("https://apibookfair.danielefarriciello.dev/api/v1/chat-bot", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
