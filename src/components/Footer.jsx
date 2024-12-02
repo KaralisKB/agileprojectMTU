@@ -57,49 +57,52 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      <div className="footer-container">
-        <div className="footer-newsletter">
-          <h3>Stay Updated!</h3>
-          <p>Sign up for our newsletter to receive the latest updates on the book fair.</p>
-          <div className="footer-newsletter-form">
-            <input type="email" placeholder="Enter your email" />
-            <button type="submit">Subscribe</button>
-          </div>
-        </div>
-
-        {/* Chatbot Section */}
-        <div className="chatbot-section">
-          <h3>Chatbot</h3>
-          <form onSubmit={handleChatSubmit} className="chatbot-form">
-            <input
-              type="text"
-              placeholder="Ask me anything..."
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              className="chatbot-input"
-            />
-            <button type="submit" className="chatbot-submit" disabled={loading}>
-              {loading ? "Loading..." : "Send"}
-            </button>
-          </form>
-          {chatbotResponse && (
-            <div className="chatbot-response">
-              <strong>AI:</strong> {chatbotResponse}
-            </div>
-          )}
-          {error && (
-            <div className="chatbot-error">
-              <strong>Error:</strong> {error}
-            </div>
-          )}
-        </div>
-
-        <p className="footer-text">
-          Follow us on social media for updates and news!
-          <br />
-          © 2024 International Book Fair. All rights reserved.
-        </p>
+<div className="footer-container">
+  <div className="footer-sections">
+    {/* Newsletter Section */}
+    <div className="footer-newsletter">
+      <h3>Stay Updated!</h3>
+      <p>Sign up for our newsletter to receive the latest updates on the book fair.</p>
+      <div className="footer-newsletter-form">
+        <input type="email" placeholder="Enter your email" />
+        <button type="submit">Subscribe</button>
       </div>
+    </div>
+
+    {/* Chatbot Section */}
+    <div className="chatbot-section">
+      <h3>Chatbot</h3>
+      <form onSubmit={handleChatSubmit} className="chatbot-form">
+        <input
+          type="text"
+          placeholder="Ask me anything..."
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          className="chatbot-input"
+        />
+        <button type="submit" className="chatbot-submit" disabled={loading}>
+          {loading ? "Loading..." : "Send"}
+        </button>
+      </form>
+      {chatbotResponse && (
+        <div className="chatbot-response">
+          <strong>AI:</strong> {chatbotResponse}
+        </div>
+      )}
+      {error && (
+        <div className="chatbot-error">
+          <strong>Error:</strong> {error}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <p className="footer-text">
+    Follow us on social media for updates and news!
+    <br />
+    © 2024 International Book Fair. All rights reserved.
+  </p>
+</div>
     </footer>
   );
 };

@@ -1,205 +1,191 @@
 /* Footer General Styles */
 .footer {
-    padding-top: 4rem;
-    background-color: #334e68;
-    color: #f0f4f8;
-    text-align: center;
-    padding: 3rem;
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: auto; /* Push footer to the bottom */
+  padding-top: 4rem;
+  background-color: #334e68;
+  color: #f0f4f8;
+  text-align: center;
+  padding: 3rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: auto; /* Push footer to the bottom */
 }
 
 /* Footer Container */
 .footer-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
 }
 
-/* Footer Text */
-.footer-text {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1.2rem;
-    color: #dce6f0;
-    line-height: 1.5;
+/* Sections Container for Newsletter and Chatbot */
+.footer-sections {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
 }
 
-/* Newsletter Section within Footer */
+/* Newsletter Section */
 .footer-newsletter {
-    max-width: 500px; 
-    margin: 1rem auto;
-    background-color: #3e5c76;
-    padding: 1.5rem; 
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: #f0f4f8;
-    text-align: center;
+  flex: 1;
+  padding: 1.5rem;
+  background-color: #3e5c76;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #f0f4f8;
 }
 
-/* Newsletter Title */
 .footer-newsletter h3 {
-    font-family: 'Merriweather', serif;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #f0f4f8;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: "Merriweather", serif;
 }
 
-/* Newsletter Description */
 .footer-newsletter p {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    color: #dce6f0;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #dce6f0;
 }
 
-/* Newsletter Input Field and Button Container */
 .footer-newsletter-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Newsletter Input Field */
 .footer-newsletter input[type="email"] {
-    width: 55%;
-    max-width: 220px;
-    padding: 0.6rem;
-    border-radius: 4px;
-    border: none;
-    font-size: 0.9rem;
-    outline: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.3s;
-    background-color: #ffffff; 
-    color: #333; 
+  width: 100%;
+  max-width: 220px;
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: none;
+  font-size: 0.9rem;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s;
+  background-color: #ffffff;
+  color: #333;
 }
 
 .footer-newsletter input[type="email"]:focus {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Subscribe Button */
 .footer-newsletter button {
-    background-color: #2f4858;
-    color: #ffffff;
-    padding: 0.6rem 1rem; 
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  background-color: #2f4858;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 
-/* Button Hover Effect */
 .footer-newsletter button:hover {
-    background-color: #243746;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  background-color: #243746;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Decorative Line Between Newsletter and Footer Text */
-.footer-line {
-    width: 100%;
-    max-width: 600px;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    margin: 2rem 0;
+/* Chatbot Section */
+.chatbot-section {
+  flex: 1;
+  padding: 1.5rem;
+  background-color: #3e5c76;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #f0f4f8;
+}
+
+.chatbot-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: "Merriweather", serif;
+}
+
+.chatbot-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chatbot-input {
+  width: 100%;
+  max-width: 220px;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  outline: none;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.chatbot-input:focus {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-submit {
+  padding: 0.6rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.chatbot-submit:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+.chatbot-response,
+.chatbot-error {
+  margin-top: 1rem;
+  padding: 0.6rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.chatbot-response {
+  background-color: #e9f7df;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.chatbot-error {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+.footer-text {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.2rem;
+  color: #dce6f0;
+  line-height: 1.5;
 }
 
 @media (max-width: 768px) {
-    .footer-newsletter {
-        padding: 1.5rem;
-    }
-
-    .footer-newsletter-form {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .footer-newsletter input[type="email"] {
-        width: 100%;
-    }
-
-    .footer-newsletter button {
-        width: 100%;
-    }
-}
-
-.chatbot-section {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .chatbot-section h3 {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    color: #333;
-  }
-  
-  .chatbot-form {
-    display: flex;
-    gap: 0.5rem;
+  .footer-sections {
     flex-direction: column;
-    align-items: center;
+    gap: 1rem;
   }
-  
-  .chatbot-input {
-    width: 90%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
+
+  .footer-newsletter,
+  .chatbot-section {
+    max-width: 100%;
   }
-  
-  .chatbot-submit {
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    width: 90%;
-    transition: background-color 0.3s;
-  }
-  
-  .chatbot-submit:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .chatbot-submit:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-  
-  .chatbot-response,
-  .chatbot-error {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    text-align: left;
-  }
-  
-  .chatbot-response {
-    background-color: #e9f7df;
-    border: 1px solid #c3e6cb;
-    color: #155724;
-  }
-  
-  .chatbot-error {
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    color: #721c24;
-  }
-  
+}
