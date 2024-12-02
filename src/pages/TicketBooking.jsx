@@ -92,132 +92,125 @@ const TicketBooking = () => {
 
   return (
     <div className="ticket-booking-container">
-      <h2 className="ticket-booking-title">Book Your Tickets</h2>
-      <form className="ticket-booking-form" onSubmit={handleConfirmBooking}>
-        {/* Section 1: Personal Information */}
-        <fieldset>
-          <legend>Personal Information</legend>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter your full name"
-            value={formData.name}
-            onChange={handleInputChange}
-            required
-          />
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleInputChange}
-            required
-          />
-          <label htmlFor="phone">Phone Number:</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Enter your phone number"
-            value={formData.phone}
-            onChange={handleInputChange}
-            required
-          />
-        </fieldset>
+ <h2 className="ticket-booking-title">Book Your Tickets</h2>
+  <form className="ticket-booking-form" onSubmit={handleConfirmBooking}>
+    {/* Personal Information Section */}
+    <hr className="section-divider" data-title="Personal Information" />
+    <label htmlFor="name">Name:</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      placeholder="Enter your full name"
+      value={formData.name}
+      onChange={handleInputChange}
+      required
+    />
+    <label htmlFor="email">Email:</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="Enter your email"
+      value={formData.email}
+      onChange={handleInputChange}
+      required
+    />
+    <label htmlFor="phone">Phone Number:</label>
+    <input
+      type="tel"
+      id="phone"
+      name="phone"
+      placeholder="Enter your phone number"
+      value={formData.phone}
+      onChange={handleInputChange}
+      required
+    />
 
-        {/* Section 2: Booking Information */}
-        <fieldset>
-          <legend>Booking Details</legend>
-          <label htmlFor="date">Select Date:</label>
-          <select
-            id="date"
-            name="date"
-            value={formData.date}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">-- Select a date --</option>
-            <option value="18th July">18th July</option>
-            <option value="19th July">19th July</option>
-            <option value="20th July">20th July</option>
-            <option value="21st July">21st July</option>
-            <option value="22nd July">22nd July</option>
-          </select>
-          <label htmlFor="adultTickets">Adult Tickets (€5):</label>
-          <input
-            type="number"
-            id="adultTickets"
-            name="adultTickets"
-            value={formData.adultTickets}
-            onChange={handleInputChange}
-            min="0"
-          />
-          <label htmlFor="childTickets">Child Tickets (€3):</label>
-          <input
-            type="number"
-            id="childTickets"
-            name="childTickets"
-            value={formData.childTickets}
-            onChange={handleInputChange}
-            min="0"
-          />
-          <label htmlFor="morningTickets">Morning Admission Tickets (€3):</label>
-          <input
-            type="number"
-            id="morningTickets"
-            name="morningTickets"
-            value={formData.morningTickets}
-            onChange={handleInputChange}
-            min="0"
-          />
-        </fieldset>
+    {/* Booking Details Section */}
+    <hr className="section-divider" data-title="Booking Details" />
+    <label htmlFor="date">Select Date:</label>
+    <select
+      id="date"
+      name="date"
+      value={formData.date}
+      onChange={handleInputChange}
+      required
+    >
+      <option value="">-- Select a date --</option>
+      <option value="18th July">18th July</option>
+      <option value="19th July">19th July</option>
+      <option value="20th July">20th July</option>
+      <option value="21st July">21st July</option>
+      <option value="22nd July">22nd July</option>
+    </select>
+    <label htmlFor="adultTickets">Adult Tickets (€5):</label>
+    <input
+      type="number"
+      id="adultTickets"
+      name="adultTickets"
+      value={formData.adultTickets}
+      onChange={handleInputChange}
+      min="0"
+    />
+    <label htmlFor="childTickets">Child Tickets (€3):</label>
+    <input
+      type="number"
+      id="childTickets"
+      name="childTickets"
+      value={formData.childTickets}
+      onChange={handleInputChange}
+      min="0"
+    />
+    <label htmlFor="morningTickets">Morning Admission Tickets (€3):</label>
+    <input
+      type="number"
+      id="morningTickets"
+      name="morningTickets"
+      value={formData.morningTickets}
+      onChange={handleInputChange}
+      min="0"
+    />
 
-        {/* Section 3: Payment Information */}
-        <fieldset>
-          <legend>Payment Details</legend>
-          <label htmlFor="creditCard">Credit Card Number:</label>
-          <input
-            type="text"
-            id="creditCard"
-            name="creditCard"
-            placeholder="Enter your credit card number"
-            value={formData.creditCard}
-            onChange={handleInputChange}
-            required
-          />
-          <label htmlFor="expiryDate">Expiry Date:</label>
-          <input
-            type="text"
-            id="expiryDate"
-            name="expiryDate"
-            placeholder="MM/YY"
-            value={formData.expiryDate}
-            onChange={handleInputChange}
-            required
-          />
-          <label htmlFor="cvv">CVV:</label>
-          <input
-            type="text"
-            id="cvv"
-            name="cvv"
-            placeholder="Enter CVV"
-            value={formData.cvv}
-            onChange={handleInputChange}
-            required
-          />
-        </fieldset>
+    {/* Payment Details Section */}
+    <hr className="section-divider" data-title="Payment Details" />
+    <label htmlFor="creditCard">Credit Card Number:</label>
+    <input
+      type="text"
+      id="creditCard"
+      name="creditCard"
+      placeholder="Enter your credit card number"
+      value={formData.creditCard}
+      onChange={handleInputChange}
+      required
+    />
+    <label htmlFor="expiryDate">Expiry Date:</label>
+    <input
+      type="text"
+      id="expiryDate"
+      name="expiryDate"
+      placeholder="MM/YY"
+      value={formData.expiryDate}
+      onChange={handleInputChange}
+      required
+    />
+    <label htmlFor="cvv">CVV:</label>
+    <input
+      type="text"
+      id="cvv"
+      name="cvv"
+      placeholder="Enter CVV"
+      value={formData.cvv}
+      onChange={handleInputChange}
+      required
+    />
 
-
-        <p className="ticket-total-price">Total Price: €{calculateTotalPrice()}</p>
-
-        <button type="submit" className="confirm-booking-button">
-          Confirm Booking
-        </button>
-      </form>
+    {/* Total Price and Submit */}
+    <p className="ticket-total-price">Total Price: €{calculateTotalPrice()}</p>
+    <button type="submit" className="confirm-booking-button">
+      Confirm Booking
+    </button>
+  </form>
 
       {showPopup && (
         <div className="popup-overlay">

@@ -1,25 +1,32 @@
 .ticket-booking-container {
-  max-width: 600px;
+  max-width: 500px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #f9fafb;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  background-color: #f0f4f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
 }
 
 .ticket-booking-title {
   font-family: 'Merriweather', serif;
-  font-size: 2.5rem;
-  color: #2f4858;
+  font-size: 2rem;
+  color: #334e68;
   margin-bottom: 1.5rem;
 }
 
 .ticket-booking-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
+}
+
+label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  color: #334e68;
+  text-align: left;
+  margin-bottom: 0.2rem;
 }
 
 /* Form Section Styling */
@@ -40,41 +47,29 @@
   padding-bottom: 0.5rem;
 }
 
-label {
-  font-size: 1rem;
-  color: #2f4858;
-  margin-bottom: 0.5rem;
-  display: block;
-}
 
-input,
-select,
-textarea {
-  width: 100%;
+input, select, textarea {
   padding: 0.8rem;
-  margin-top: 0.3rem;
   border: 1px solid #d0d7de;
-  border-radius: 8px;
+  border-radius: 5px;
   font-size: 1rem;
-  background-color: #ffffff;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
   outline: none;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #334e68;
 }
-
-input:focus,
-select:focus,
-textarea:focus {
+input:focus, select:focus, textarea:focus {
   border-color: #3e5c76;
-  box-shadow: 0 0 6px rgba(62, 92, 118, 0.4);
+  background-color: #f0f4f8;
 }
 
 .ticket-total-price {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #2f4858;
-  text-align: center;
-  margin-top: 1.5rem;
+  color: #334e68;
+  margin-top: 1rem;
 }
 
 .confirm-booking-button {
@@ -82,12 +77,10 @@ textarea:focus {
   color: #ffffff;
   padding: 0.8rem 1.5rem;
   border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
+  border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 
 .confirm-booking-button:hover {
@@ -99,6 +92,27 @@ textarea:focus {
 .confirm-booking-button:active {
   transform: translateY(2px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid #d0d7de;
+  margin: 2rem 0 1rem;
+  position: relative;
+}
+
+.section-divider::after {
+  content: attr(data-title);
+  position: absolute;
+  top: -0.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f0f4f8;
+  padding: 0 1rem;
+  font-size: 1rem;
+  color: #334e68;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
 }
 
 /* Popup Styles */
@@ -152,7 +166,6 @@ textarea:focus {
   background: #243746;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .ticket-booking-container {
     padding: 1.5rem;
@@ -172,3 +185,5 @@ textarea:focus {
     font-size: 1rem;
   }
 }
+
+
