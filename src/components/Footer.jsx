@@ -2,44 +2,56 @@ import React, { useState } from "react";
 import "./Footer.css";
 
 const Footer = () => {
-  const [chatbotVisible, setChatbotVisible] = useState(false);
-  const [userMessage, setUserMessage] = useState(""); // Store user input
-  const [chatbotResponse, setChatbotResponse] = useState(""); // Store chatbot's response
+  const [userInput, setUserInput] = useState(""); // User's query
+  const [chatHistory, setChatHistory] = useState(""); // Chat context (conversation history)
+  const [chatbotResponse, setChatbotResponse] = useState(""); // Latest chatbot response
+  const [loading, setLoading] = useState(false); // Loading state
+  const [error, setError] = useState(""); // Error message
 
-  const toggleChatbot = () => {
-    setChatbotVisible(!chatbotVisible);
-  };
+  const handleChatSubmit = async (e) => {
+    e.preventDefault();
 
-  const sendMessageToChatbot = async () => {
-    if (!userMessage.trim()) {
+    if (!userInput.trim()) {
       alert("Please enter a message.");
       return;
     }
 
+    setLoading(true);
+    setError("");
+
+    // Prepare request body
+    const requestBody = {
+      context: chatHistory,
+      message: userInput,
+    };
+
     try {
-      const response = await fetch(
-        "https://apibookfair.danielefarriciello.dev/api/v1/chat-bot",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ message: userMessage }), // Send user input
-        }
-      );
+      const response = await fetch("https://apibookfair.danielefarriciello.dev/api/v1/chat-bot", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
 
       if (response.ok) {
         const data = await response.json();
-        setChatbotResponse(data.response || "No response from chatbot.");
+        const aiResponse = data.choices?.[0]?.message?.content || "No response from chatbot.";
+        setChatbotResponse(aiResponse);
+        setChatHistory((prev) => `${prev}\nUser: ${userInput}\nAI: ${aiResponse}`);
+        setUserInput(""); // Clear input field
       } else {
-        setChatbotResponse("Failed to connect to chatbot.");
+        const errorMessage = `Failed to fetch response: ${response.status}`;
+        setError(errorMessage);
+        console.error(errorMessage);
       }
-    } catch (error) {
-      console.error("Error fetching chatbot API:", error);
-      setChatbotResponse("An error occurred while connecting to chatbot.");
+    } catch (err) {
+      const errorMessage = "An error occurred while communicating with the chatbot.";
+      setError(errorMessage);
+      console.error(errorMessage, err);
+    } finally {
+      setLoading(false);
     }
-
-    setUserMessage(""); // Clear input after sending
   };
 
   return (
@@ -54,25 +66,32 @@ const Footer = () => {
           </div>
         </div>
 
-        <button className="chatbot-button" onClick={toggleChatbot}>
-          {chatbotVisible ? "Close Chatbot" : "Open Chatbot"}
-        </button>
-
-        {chatbotVisible && (
-          <div className="chatbot-container">
-            <h4>Chatbot</h4>
-            <div>
-              <input
-                type="text"
-                value={userMessage}
-                placeholder="Type your message..."
-                onChange={(e) => setUserMessage(e.target.value)} // Update user input
-              />
-              <button onClick={sendMessageToChatbot}>Send</button>
+        {/* Chatbot Section */}
+        <div className="chatbot-section">
+          <h3>Chatbot</h3>
+          <form onSubmit={handleChatSubmit} className="chatbot-form">
+            <input
+              type="text"
+              placeholder="Ask me anything..."
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              className="chatbot-input"
+            />
+            <button type="submit" className="chatbot-submit" disabled={loading}>
+              {loading ? "Loading..." : "Send"}
+            </button>
+          </form>
+          {chatbotResponse && (
+            <div className="chatbot-response">
+              <strong>AI:</strong> {chatbotResponse}
             </div>
-            {chatbotResponse && <p>Response: {chatbotResponse}</p>}
-          </div>
-        )}
+          )}
+          {error && (
+            <div className="chatbot-error">
+              <strong>Error:</strong> {error}
+            </div>
+          )}
+        </div>
 
         <p className="footer-text">
           Follow us on social media for updates and news!
@@ -85,6 +104,7 @@ const Footer = () => {
 };
 
 export default Footer;
+
 
 
 // import React from 'react';

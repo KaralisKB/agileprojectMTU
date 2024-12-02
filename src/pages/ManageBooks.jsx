@@ -9,7 +9,7 @@ const ManageBooks = () => {
     title: "",
     author: "",
     description: "",
-    exhibitor_name: "", // Added exhibitor_name
+    exhibitor_name: "", 
   });
   const [editingBook, setEditingBook] = useState(null);
   const [loading, setLoading] = useState(false);
