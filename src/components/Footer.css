@@ -28,10 +28,10 @@
 
 /* Newsletter Section within Footer */
 .footer-newsletter {
-    max-width: 500px; /* Reduced width to make it smaller */
+    max-width: 500px; 
     margin: 1rem auto;
     background-color: #3e5c76;
-    padding: 1.5rem; /* Reduced padding for a more compact look */
+    padding: 1.5rem; 
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: #f0f4f8;
@@ -41,7 +41,7 @@
 /* Newsletter Title */
 .footer-newsletter h3 {
     font-family: 'Merriweather', serif;
-    font-size: 2rem; /* Reduced font size */
+    font-size: 2rem;
     margin-bottom: 1rem;
     color: #f0f4f8;
 }
@@ -65,8 +65,8 @@
 /* Newsletter Input Field */
 .footer-newsletter input[type="email"] {
     width: 55%;
-    max-width: 220px; /* Adjusted max width */
-    padding: 0.6rem; /* Reduced padding */
+    max-width: 220px;
+    padding: 0.6rem;
     border-radius: 4px;
     border: none;
     font-size: 0.9rem;
@@ -77,7 +77,6 @@
     color: #333; 
 }
 
-/* Input Field Focus Effect */
 .footer-newsletter input[type="email"]:focus {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -86,7 +85,7 @@
 .footer-newsletter button {
     background-color: #2f4858;
     color: #ffffff;
-    padding: 0.6rem 1rem; /* Reduced padding for a more compact button */
+    padding: 0.6rem 1rem; 
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -109,10 +108,9 @@
     margin: 2rem 0;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .footer-newsletter {
-        padding: 1.5rem; /* Maintain padding for smaller screens */
+        padding: 1.5rem;
     }
 
     .footer-newsletter-form {
@@ -128,3 +126,40 @@
         width: 100%;
     }
 }
+
+
+.chatbot-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #3e5c76;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 1rem 0;
+  }
+  
+  .chatbot-button:hover {
+    background-color: #334e68;
+  }
+  
+  .chatbot-container {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chatbot-container h4 {
+    margin-bottom: 0.5rem;
+    color: #3e5c76;
+  }
+  
+  .chatbot-container p {
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
