@@ -12,6 +12,7 @@ const Footer = () => {
       try {
         const response = await fetch("https://apibookfair.danielefarriciello.dev/api/v1/chat-bot", {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
