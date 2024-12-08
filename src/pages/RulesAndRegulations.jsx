@@ -1,5 +1,5 @@
 import React from "react";
-import "./RulesAndRegulations.css"; // Add styling later if needed
+import "./RulesAndRegulations.css";
 
 const RulesAndRegulations = () => {
   return (

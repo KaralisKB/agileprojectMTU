@@ -22,7 +22,7 @@ const ExhibitorBooks = () => {
 
       const response = await fetch(`${BASE_URL}/list-books`, {
         method: "GET",
-        credentials: "include", // Include cookies for authentication
+        credentials: "include", 
       });
 
       if (!response.ok) {
@@ -58,7 +58,7 @@ const ExhibitorBooks = () => {
       const response = await fetch(`${BASE_URL}/create-book`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // Include cookies for authentication
+        credentials: "include",
         body: JSON.stringify(newBook),
       });
 
@@ -69,7 +69,7 @@ const ExhibitorBooks = () => {
         throw new Error("Failed to add book.");
       }
 
-      await fetchAllBooks(); // Refresh the book list after adding a new book
+      await fetchAllBooks(); 
       setNewBook({ title: "", author: "", description: "", exhibitor_name: "" });
     } catch (error) {
       setError(error.message || "Failed to add book. Please try again.");

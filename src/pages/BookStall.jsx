@@ -5,7 +5,7 @@ import "./BookStall.css";
 const BookStall = () => {
   const { stalls, addStallRequest } = useContext(StallContext);
   const [selectedStall, setSelectedStall] = useState(null);
-  const [exhibitorName, setExhibitorName] = useState(""); // Field for exhibitor name
+  const [exhibitorName, setExhibitorName] = useState(""); 
 
   // Filter available stalls
   const availableStalls = stalls.filter((stall) => !stall.assigned);
@@ -19,8 +19,8 @@ const BookStall = () => {
         exhibitor: { name: exhibitorName, id: Date.now() }, // Store exhibitor name
       });
       alert(`Request submitted for Stall ${selectedStall.number}`);
-      setSelectedStall(null); // Reset selected stall
-      setExhibitorName(""); // Reset exhibitor name
+      setSelectedStall(null); 
+      setExhibitorName(""); 
     } else {
       alert("Please select a stall and enter your name to proceed.");
     }

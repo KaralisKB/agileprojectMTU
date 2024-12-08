@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import emailjs from "emailjs-com"; // Import EmailJS
+import emailjs from "emailjs-com"; 
 import "./TicketBooking.css";
 
 const TicketBooking = () => {
@@ -58,15 +58,15 @@ const TicketBooking = () => {
 
     emailjs
       .send(
-        "service_37yphzp", // Replace with your Service ID
-        "template_xqt65it", // Replace with your Template ID
+        "service_37yphzp",
+        "template_xqt65it", 
         emailParams,
-        "mGNlosJ3yb5Y5ysXJ" // Replace with your Public Key
+        "mGNlosJ3yb5Y5ysXJ"
       )
       .then(
         (response) => {
           console.log("Email successfully sent:", response);
-          setShowPopup(true); // Show popup on success
+          setShowPopup(true); 
         },
         (error) => {
           console.error("Email failed to send:", error);

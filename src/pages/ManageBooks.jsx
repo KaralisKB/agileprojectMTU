@@ -23,7 +23,7 @@ const ManageBooks = () => {
 
       const response = await fetch(`${BASE_URL}/list-books`, {
         method: "GET",
-        credentials: "include", // Include cookies
+        credentials: "include", 
       });
 
       if (!response.ok) {
@@ -56,7 +56,7 @@ const ManageBooks = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // Include cookies
+        credentials: "include",
         body: JSON.stringify(newBook),
       });
 
@@ -82,7 +82,7 @@ const ManageBooks = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // Include cookies
+        credentials: "include",
         body: JSON.stringify(editingBook),
       });
 
@@ -105,7 +105,7 @@ const ManageBooks = () => {
     try {
       const response = await fetch(`${BASE_URL}/delete-book/${bookId}`, {
         method: "DELETE",
-        credentials: "include", // Include cookies
+        credentials: "include", 
       });
 
       if (!response.ok) {

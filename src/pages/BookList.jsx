@@ -5,12 +5,12 @@ const BookList = () => {
   const BASE_URL = "https://apibookfair.danielefarriciello.dev/api/v1";
 
   const [books, setBooks] = useState([]);
-  const [originalBooks, setOriginalBooks] = useState([]); // Store original order
+  const [originalBooks, setOriginalBooks] = useState([]); 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [sortOrder, setSortOrder] = useState(null); // Track sort order
+  const [sortOrder, setSortOrder] = useState(null);
 
   // Fetch all books
   const fetchAllBooks = async () => {
@@ -20,7 +20,7 @@ const BookList = () => {
 
       const response = await fetch(`${BASE_URL}/list-books`, {
         method: "GET",
-        credentials: "include", // Include cookies
+        credentials: "include", 
       });
 
       if (!response.ok) {
@@ -32,8 +32,8 @@ const BookList = () => {
 
       const data = await response.json();
       setBooks(data);
-      setOriginalBooks(data); // Save the original book list
-      setSelectedBook(null); // Clear selected book when fetching all
+      setOriginalBooks(data);
+      setSelectedBook(null); 
     } catch (error) {
       setError(error.message || "Failed to fetch books. Please try again.");
       console.error("Error fetching books:", error);
@@ -58,7 +58,7 @@ const BookList = () => {
   // Reset to default order
   const resetToDefaultOrder = () => {
     setBooks(originalBooks);
-    setSortOrder(null); // Clear the sort order
+    setSortOrder(null);
   };
 
   // Handle search input change
@@ -66,7 +66,7 @@ const BookList = () => {
     setSearchTerm(e.target.value);
   };
 
-  // Trigger book search
+  // Book search
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -74,17 +74,16 @@ const BookList = () => {
         book.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setBooks(filteredBooks);
-      setSortOrder(null); // Reset sorting if search is performed
+      setSortOrder(null); 
     }
   };
 
-  // Clear search and fetch all books
+  // Ssearch and fetch all books
   const handleClearSearch = () => {
     setSearchTerm("");
     fetchAllBooks();
   };
 
-  // Fetch all books on component mount
   useEffect(() => {
     fetchAllBooks();
   }, []);
@@ -138,7 +137,6 @@ const BookList = () => {
         </button>
       </div>
 
-      {/* Loading and Error Messages */}
       {loading && <p className="loading-message">Loading...</p>}
       {error && <p className="error-message">{error}</p>}
 
