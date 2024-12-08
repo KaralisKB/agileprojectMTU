@@ -12,7 +12,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './index.css';  // Add any global styles here
+import './index.css';  
 import { ExhibitorProvider } from './contexts/ExhibitorContext';
 import { StallProvider } from './contexts/StallContext'; 
 
