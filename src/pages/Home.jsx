@@ -68,21 +68,26 @@ const Home = () => {
         <h2 className="featured-title">Featured Books</h2>
         <p>Click to learn more! </p>
         <div className="book-grid">
-          <BookCard
-            title="Book Title 1"
-            author="Author 1"
-            description="This is a wonderful book that discusses the importance of creativity in daily life."
-          />
-          <BookCard
-            title="Book Title 2"
-            author="Author 2"
-            description="A gripping novel that explores the complexities of human emotions and relationships."
-          />
-          <BookCard
-            title="Book Title 3"
-            author="Author 3"
-            description="An insightful guide into the world of literature and its influence on culture."
-          />
+        <BookCard
+    title="Exploring Academic Excellence"
+    author="Dr. John Cambridge"
+    description="A comprehensive guide to achieving academic excellence in modern education systems."
+  />
+  <BookCard
+    title="Argentine Cuisine: A Culinary Journey"
+    author="Maria Lopez"
+    description="A flavorful journey through Argentina's iconic dishes and culinary history."
+  />
+  <BookCard
+    title="Cultural Heritage of Taipei"
+    author="Dr. Ming-Yu Chen"
+    description="A celebration of the rich cultural heritage and traditions of Taipei."
+  />
+    <BookCard
+    title="The Science of Learning"
+    author="Prof. Emily Richards"
+    description="An in-depth analysis of the processes and methodologies behind effective learning."
+  />
         </div>
       </div>
 

@@ -35,7 +35,7 @@ const App = () => {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    // On app load, check if the user is logged in and their role
+    // Check if the user is logged in and their role
     const token = localStorage.getItem('authToken');
     const role = localStorage.getItem('userRole');
     setIsLoggedIn(!!token); // Convert token to boolean
